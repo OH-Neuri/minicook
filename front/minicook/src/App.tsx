@@ -1,9 +1,14 @@
 import React from "react";
 
 import "./App.css";
+import Routers from "./routes";
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <Routers />
+    </>
+  );
 }
 
 export default App;
