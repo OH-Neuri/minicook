@@ -22,7 +22,7 @@ const SearchBarWrapper = styled.div`
  display: flex;
  width: 22rem;
  background-color:#fcfcfc;
- border : 1px solid #969696;
+ border : 1px solid #d3bea7;
  border-radius: 25px;
  display: flex;
  align-items: center;

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import NavBar from "../navBar";
-import mncLogo from "./assets/minicook-logo.svg";
+import mainLogo from "../../data/assets/minicook_logo.svg";
 import { useNavigate } from "react-router-dom";
+
 const Header = () => {
   const [user, setUser] = useState(true);
   const navigate = useNavigate();
@@ -16,8 +17,7 @@ const Header = () => {
     <>
       <HeaderWrapper>
         <div className='header__logo cursor-pointer' data-id={""} onClick={changePage}>
-          <img width={38} height={38} src={mncLogo} alt={`미니쿡아이콘`}></img>
-          <span className='text-2xl px-2 font-semibold'>미니쿡</span>
+          <img width={120} height={120} src={mainLogo} alt={`미니쿡아이콘`}></img>
         </div>
         <div className='header__button cursor-pointer'>
           {user ? (
@@ -41,13 +41,13 @@ const Header = () => {
 // 일단 JSX부분에 html 처럼 작성하고, 그 구분되는 클래스는 Wrapper 컴포넌트 안에 작성한다.
 const HeaderWrapper = styled.div`
 width:100%;
-height:4.3rem;
+height:4.5rem;
 display: flex;
 justify-content: space-between;
 align-items: center;
 text-align: center;
 padding: 0 20%;
-background-color: ${(props) => props.theme.mainColor};
+background-color: ${(props) => props.theme.colors.color1};
 
 
  .header__logo{
@@ -63,13 +63,14 @@ background-color: ${(props) => props.theme.mainColor};
     > div {
       display: flex;
       align-items: center;
-      border: 1px solid #969696;
+      border: 1px solid #d3bea7;
       height: 1.75rem;
       padding: 0 1.4rem;
       margin-left: 1.1rem;
       border-radius: 15px;
       font-size:small;
-      background-color: white;
+      background-color: #dcae79;
+      color: white;
     }
   }
 

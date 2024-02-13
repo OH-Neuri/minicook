@@ -39,9 +39,9 @@ const NavBarWrapper = styled.div`
   width  : 100%;
   display: flex;
   justify-content: center;
-  border-top :  1px solid rgb(190, 190, 190);
-  border-bottom:  1px solid rgb(190, 190, 190);
-  background-color: ${(props) => props.theme.mainColor};
+  border-top :  1.5px solid rgb(238, 238, 238);
+  border-bottom:  1.5px solid rgb(238, 238, 238);
+  background-color: ${(props) => props.theme.colors.color1};
 
   .navbar__info{
     width: 60%;
