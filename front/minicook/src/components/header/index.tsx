@@ -16,10 +16,10 @@ const Header = () => {
   return (
     <>
       <HeaderWrapper>
-        <div className='header__logo cursor-pointer' data-id={""} onClick={changePage}>
-          <img width={120} height={120} src={mainLogo} alt={`미니쿡아이콘`}></img>
+        <div className='header-logo cursor-pointer' data-id={""} onClick={changePage}>
+          <img width={115} height={115} src={mainLogo} alt={`미니쿡아이콘`}></img>
         </div>
-        <div className='header__button cursor-pointer'>
+        <div className='header-button cursor-pointer'>
           {user ? (
             <>
               <div data-id={"login"} onClick={(e) => changePage(e)}>
@@ -41,7 +41,7 @@ const Header = () => {
 // 일단 JSX부분에 html 처럼 작성하고, 그 구분되는 클래스는 Wrapper 컴포넌트 안에 작성한다.
 const HeaderWrapper = styled.div`
 width:100%;
-height:4.5rem;
+height:5rem;
 display: flex;
 justify-content: space-between;
 align-items: center;
@@ -50,12 +50,12 @@ padding: 0 20%;
 background-color: ${(props) => props.theme.colors.color1};
 
 
- .header__logo{
+ .header-logo{
   display: flex;
   align-items: center;
 }
 
-.header__button{
+.header-button{
   display: flex;
   justify-content: end;
   align-items: center;
