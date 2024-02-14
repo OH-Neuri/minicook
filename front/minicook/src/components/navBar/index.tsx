@@ -14,11 +14,11 @@ const NavBar = () => {
   return (
     <>
       <NavBarWrapper>
-        <div className='navbar__info'>
-          <div className='navbar__list'>
+        <div className='navbar-info'>
+          <div className='navbar-list'>
             {menu.map(({ title, link }) => (
               <div
-                className='navbar__items'
+                className='navbar-items'
                 key={title}
                 data-id={link}
                 onClick={(e) => changePage(e)}>
@@ -27,7 +27,7 @@ const NavBar = () => {
             ))}
           </div>
           <SearchBar />
-          <div className='navbar__text'>#대파 #삼겹살 #김밥</div>
+          <div className='navbar-text'>#대파 #삼겹살 #김밥</div>
         </div>
       </NavBarWrapper>
     </>
@@ -39,18 +39,18 @@ const NavBarWrapper = styled.div`
   width  : 100%;
   display: flex;
   justify-content: center;
-  border-top :  1.5px solid rgb(238, 238, 238);
-  border-bottom:  1.5px solid rgb(238, 238, 238);
+  border-top :  1.8px solid #fffbf5;
+  border-bottom:  1.8px solid #fffbf5;
   background-color: ${(props) => props.theme.colors.color1};
 
-  .navbar__info{
+  .navbar-info{
     width: 60%;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 
-  .navbar__text{
+  .navbar-text{
     font-size: small;
     width: 25%;
     justify-content: end;
@@ -59,11 +59,11 @@ const NavBarWrapper = styled.div`
     font-weight: 300;
   }
 
-  .navbar__list{
+  .navbar-list{
     display: flex;
     width: 25%;
   }
-  .navbar__items{
+  .navbar-items{
     font-weight: 600;
   }
   
