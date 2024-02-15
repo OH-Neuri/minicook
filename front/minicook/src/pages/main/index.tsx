@@ -1,22 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import part1Image from "./assets/main_page_image1.svg";
 import { WiDirectionRight } from "react-icons/wi";
-import menu from "./data/menu";
+import { BsChevronLeft } from "react-icons/bs";
+import { BsChevronRight } from "react-icons/bs";
+import { top4Recipe, recommendRecipe } from "./data/menu";
+import { useRef } from "react";
+import { FaCircle } from "react-icons/fa";
 const Main = () => {
-  let [index, setIndex] = useState(0);
+  const [index, setIndex] = useState<number>(0);
+  const carouselImageRef = useRef<HTMLDivElement | null>(null);
 
   const prevClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (index === 0) return;
     setIndex(index - 1);
-    (e.target as HTMLDivElement).style.transform = `translate3d(-${500 * index}px,0,0)`;
   };
 
   const nextClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (index === 2) return;
-    setIndex(index + 1);
-    (e.target as HTMLDivElement).style.transform = `translate3d(-${500 * index}px,0,0)`;
+    if (index === 3) return;
+    setIndex(index + 1); //비동기 함수라 나중에 반영됨 렌더링 후
   };
+
+  useEffect(() => {
+    if (carouselImageRef.current != null) {
+      carouselImageRef.current.style.transform = `translateX(-${index * 570.11}px)`;
+    }
+  }, [index]);
 
   return (
     <MainWrapper>
@@ -51,10 +60,10 @@ const Main = () => {
       <div className='main-part02'>
         <div className='main-part02-text'>
           인기 많은 레시피{" "}
-          <span className='text-yellow-300 text-2xl font-bold'>TOP 4</span>
+          <span className='text-amber-300 text-2xl font-bold shadow-gray-600'>TOP 4</span>
         </div>
         <div className='main-part02-image'>
-          {menu.map(({ id, name, image }, v) => (
+          {top4Recipe.map(({ id, name, image }, v) => (
             <div className='main-part02-image-box'>
               <img src={image} width={220} height={220} />
               <span className='main-part02-image-rank'>{`${v + 1}`}</span>
@@ -65,31 +74,41 @@ const Main = () => {
 
       <div className='main-part03'>
         <div className='main-part03-text'>
-          <div>
+          <div className='font-black text-2xl'>
             내게 딱 __ 맞는
             <br />
             레시피 찾기
           </div>
-          <div>
+          <div className='mt-5 text-sm text-gray-400 '>
             카테고리 별로 원하는 레시피를
             <br />
             추천받을 수 있어요.
           </div>
         </div>
+        <button className='ml-10' type='button' onClick={(e) => prevClick(e)}>
+          <BsChevronLeft size={20} />
+        </button>
         <div className='main-part03-carousel-wrapper'>
-          <div className='carousel'>
-            <img src={menu[0].image} width={30} height={30}></img>
-            <img src={menu[1].image} width={30} height={30}></img>
-            <img src={menu[2].image} width={30} height={30}></img>
-            <img src={menu[3].image} width={30} height={30}></img>
+          <div className='carousel' ref={carouselImageRef}>
+            {recommendRecipe.map(({ id, image }) => (
+              // eslint-disable-next-line jsx-a11y/alt-text
+              <img
+                className='rounded-xl'
+                key={id}
+                src={image}
+                width={80}
+                height={40}></img>
+            ))}
           </div>
-          <button type='button' onClick={(e) => prevClick(e)}>
-            prev
-          </button>
-          <button type='button' onClick={(e) => nextClick(e)}>
-            next{index}
-          </button>
+          <div className='flex mt-3'>
+            {[0, 1, 2, 3].map((v) =>
+              index === v ? <FaCircle fill={"#4d4435"} /> : <FaCircle fill={"#c9c1b1"} />
+            )}
+          </div>
         </div>
+        <button className='' type='button' onClick={(e) => nextClick(e)}>
+          <BsChevronRight size={20} />
+        </button>
       </div>
     </MainWrapper>
   );
@@ -100,28 +119,56 @@ display: flex;
 flex-direction: column;
 align-items: center;
 color: white;
-height: 180vh;
+height: 197vh;
+
   .main-part03{
-    padding: 5.3rem 25% 7rem 25%;
+    padding: 11rem 25% 8rem 25%;
     width: 100%;
-    height: 40rem;
-    background-color: green;
+    height: 50rem;
+    background-color: #F4F1EB;
+    display: flex;
+    justify-content: space-around;
+
+    .main-part03-text{
+      line-height: 3rem;
+      padding: 4rem 0;
+    }
 
     .main-part03-carousel-wrapper{
-      width: 500px;
-      height: 300px;
-
+      height: 28rem;
+      width: 60%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       > .carousel{
+        padding-left: 3px;
+        width: 36rem;
+        height: 25rem;
         display: flex;
-        transform: translate3d(0,0,0);
+        transform: translateX(0px);
         transition : transform 0.2s;
-      
-      > img {
-        width: 500px;
-        height: 300px;
-      }
+
+        > img {
+          width: 36rem;
+          height: 25rem;
+        }
       }
     }
+      > button{
+        margin-top:11rem;
+        width: 3rem;
+        height: 3rem;
+        background-color: white;
+        border-radius: 20px;
+        top:45%;
+        z-index: 10;
+        box-shadow: 2px 2px 2px 2px #dbd8d1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    
   }
 
   .main-part01{
@@ -141,9 +188,9 @@ height: 180vh;
       justify-content: space-around;
       width: 13rem;
       height: 2.5rem;
-      background-color: #5f4115;
+      background-color: #283618;
       border-radius: 10px;
-      border: 2px solid #5f4115;
+      border: 2px solid #283618;
       margin-top: 2.75rem;
       padding-left: 5px;
       > span{
@@ -157,7 +204,7 @@ height: 180vh;
     width: 100%;
     padding: 2rem 20%;
     height: 25rem;
-    background-color: #db8f39;
+    background-color: #b7b7a4;
     
     .main-part02-text{
       font-size:1.5rem;
