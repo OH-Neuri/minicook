@@ -1,8 +1,9 @@
 import { FaGithub } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
 import { RiKakaoTalkFill } from "react-icons/ri";
+import FooterTab from "../type/type";
 
-const info = [
+const info: FooterTab[] = [
   {
     icon: <FaGithub />,
     link: "https://github.com/OH-Neuri",

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import logo from "../../data/assets/minicook_logo.svg";
-import info from "./data/info";
+import info from "./data/data";
 
 const Footer = () => {
   const openPage = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -39,7 +39,7 @@ const FooterWrapper = styled.div`
   height: 17rem;
   width: 100%;
   line-height: 5rem;
-  background-color: ${(props) => props.theme.colors.color1};
+  background-color: #e4e1dc;
 
   .footer__userinfo{
     display: flex;

@@ -4,7 +4,7 @@ import part1Image from "./assets/main_page_image1.svg";
 import { WiDirectionRight } from "react-icons/wi";
 import { BsChevronLeft } from "react-icons/bs";
 import { BsChevronRight } from "react-icons/bs";
-import { top4Recipe, recommendRecipe } from "./data/menu";
+import recipe from "../../data/recipe";
 import { useRef } from "react";
 import { FaCircle } from "react-icons/fa";
 const Main = () => {
@@ -18,7 +18,8 @@ const Main = () => {
 
   const nextClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (index === 3) return;
-    setIndex(index + 1); //비동기 함수라 나중에 반영됨 렌더링 후
+    setIndex(index + 1);
+    console.log(index, 11);
   };
 
   useEffect(() => {
@@ -63,9 +64,9 @@ const Main = () => {
           <span className='text-amber-300 text-2xl font-bold shadow-gray-600'>TOP 4</span>
         </div>
         <div className='main-part02-image'>
-          {top4Recipe.map(({ id, name, image }, v) => (
+          {recipe.map(({ id, name, thumbnail }, v) => (
             <div className='main-part02-image-box'>
-              <img src={image} width={220} height={220} />
+              <img src={thumbnail} width={220} height={220} />
               <span className='main-part02-image-rank'>{`${v + 1}`}</span>
             </div>
           ))}
@@ -85,17 +86,19 @@ const Main = () => {
             추천받을 수 있어요.
           </div>
         </div>
-        <button className='ml-10' type='button' onClick={(e) => prevClick(e)}>
+
+        <button className='ml-10 ' type='button' onClick={(e) => prevClick(e)}>
           <BsChevronLeft size={20} />
         </button>
+
         <div className='main-part03-carousel-wrapper'>
           <div className='carousel' ref={carouselImageRef}>
-            {recommendRecipe.map(({ id, image }) => (
+            {recipe.map(({ id, thumbnail }) => (
               // eslint-disable-next-line jsx-a11y/alt-text
               <img
                 className='rounded-xl'
                 key={id}
-                src={image}
+                src={thumbnail}
                 width={80}
                 height={40}></img>
             ))}
