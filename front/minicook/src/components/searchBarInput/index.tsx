@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { IoSearchOutline } from "react-icons/io5";
 
-interface SearchBarProps {
+interface SearchBarInputProps {
   onSearchClick: () => void;
   onChangeInput: (newInput: string) => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearchClick, onChangeInput }) => {
+const SearchBarInput: React.FC<SearchBarInputProps> = ({
+  onSearchClick,
+  onChangeInput,
+}) => {
   const handleSearchBar = (e: React.MouseEvent<HTMLDivElement>) => {
     onSearchClick();
   };
@@ -70,4 +73,4 @@ const SearchBarWrapper = styled.div`
 }
 `;
 
-export default SearchBar;
+export default SearchBarInput;
