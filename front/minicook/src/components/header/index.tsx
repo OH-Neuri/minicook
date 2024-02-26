@@ -47,7 +47,7 @@ justify-content: space-between;
 align-items: center;
 text-align: center;
 padding: 0 20%;
-background-color: ${(props) => props.theme.colors.color1};
+background-color: #455631;
 
 
  .header-logo{
@@ -63,13 +63,13 @@ background-color: ${(props) => props.theme.colors.color1};
     > div {
       display: flex;
       align-items: center;
-      border: 1px solid #d3bea7;
       height: 1.75rem;
       padding: 0 1.4rem;
       margin-left: 1.1rem;
-      border-radius: 15px;
+      border-radius: 0px;
       font-size:small;
-      background-color: #dcae79;
+      /*border: 1px solid #d3bea7;*/
+      /*background-color: #dcae79;*/
       color: white;
     }
   }

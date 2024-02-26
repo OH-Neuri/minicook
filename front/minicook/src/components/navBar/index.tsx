@@ -58,9 +58,7 @@ const NavBar = () => {
           />
           {navBarOpen && <SearchBarInfo input={input} recipe={recipe} />}
         </div>
-        <div className='navbar-text'>
-          <>{recipe}</>#대파 #삼겹살 #김밥
-        </div>
+        <div className='navbar-text'>#대파 #삼겹살 #김밥</div>
       </div>
     </NavBarWrapper>
   );
