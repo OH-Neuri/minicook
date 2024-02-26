@@ -7,9 +7,12 @@ import { BsChevronRight } from "react-icons/bs";
 import recipe from "../../data/recipe";
 import { useRef } from "react";
 import { FaCircle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+
 const Main = () => {
   const [index, setIndex] = useState<number>(0);
   const carouselImageRef = useRef<HTMLDivElement | null>(null);
+  const navigate = useNavigate();
 
   const prevClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (index === 0) return;
@@ -19,7 +22,6 @@ const Main = () => {
   const nextClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (index === 3) return;
     setIndex(index + 1);
-    console.log(index, 11);
   };
 
   useEffect(() => {
@@ -50,7 +52,11 @@ const Main = () => {
             <br />
             마음에 드는 레시피를 저장할 수 있어요.
           </div>
-          <button className='main-part01-button'>
+          <button
+            className='main-part01-button'
+            onClick={() => {
+              navigate("/recipe/select");
+            }}>
             <span>재료 선택</span>
             <WiDirectionRight size={35} fill={"white"} />
           </button>
@@ -64,8 +70,12 @@ const Main = () => {
           <span className='text-amber-300 text-2xl font-bold shadow-gray-600'>TOP 4</span>
         </div>
         <div className='main-part02-image'>
-          {recipe.map(({ id, name, thumbnail }, v) => (
-            <div className='main-part02-image-box'>
+          {recipe.slice(0, 4).map(({ id, name, thumbnail }, v) => (
+            <div
+              className='main-part02-image-box hover:cursor-pointer'
+              onClick={() => {
+                navigate(`/recipe/${id}`);
+              }}>
               <img src={thumbnail} width={220} height={220} />
               <span className='main-part02-image-rank'>{`${v + 1}`}</span>
             </div>
