@@ -26,6 +26,7 @@ const SearchBarList: React.FC<SearchBarListProps> = ({
               ingredients.some((ingredient) => new RegExp(input).test(ingredient)) && (
                 <SearchBarItem
                   key={id}
+                  id={id}
                   like={like}
                   name={name}
                   ingredients={ingredients}
@@ -38,6 +39,7 @@ const SearchBarList: React.FC<SearchBarListProps> = ({
               new RegExp(input).test(name) && (
                 <SearchBarItem
                   key={id}
+                  id={id}
                   like={like}
                   name={name}
                   ingredients={ingredients}

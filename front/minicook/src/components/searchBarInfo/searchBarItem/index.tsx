@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { FaStar } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 interface SearchBarItemProps {
+  id: number;
   name: string;
   like: number;
   ingredients: string[];
@@ -11,9 +13,13 @@ const formatNumberWithCommas = (like: number) => {
   return like.toLocaleString();
 };
 
-const SearchBarItem: React.FC<SearchBarItemProps> = ({ name, like, ingredients }) => {
+const SearchBarItem: React.FC<SearchBarItemProps> = ({ id, name, like, ingredients }) => {
+  const navigate = useNavigate();
+
   return (
-    <SearchBarItemWrapper className='hover:bg-[#cdc8c0] hover:cursor-pointer'>
+    <SearchBarItemWrapper
+      className='hover:bg-[#cdc8c0] hover:cursor-pointer'
+      onClick={() => navigate(`/recipe/${id}`)}>
       <div className='search-bar-item-header'>
         <div className='search-bar-item-name'>{name}</div>
         <div className='search-bar-item-like'>
