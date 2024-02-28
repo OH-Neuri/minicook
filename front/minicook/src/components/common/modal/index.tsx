@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import styled from "styled-components";
 import ingredientsMenu from "../../../pages/recipe/select/data/ingredients";
 import { useParams } from "react-router-dom";
@@ -10,15 +10,11 @@ interface ModalProps {
   onClose: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ onSelect, onClose }) => {
+export const IngredientsModal: React.FC<ModalProps> = ({ onSelect, onClose }) => {
   const params = useParams();
-  const modalRef = useRef<HTMLDivElement | null>(null);
-  const handleModal = () => {
-    onClose();
-  };
-  useEffect(() => {}, []);
+
   return (
-    <ModalWrapper ref={modalRef}>
+    <IngredientsModalWrapper>
       <div className='button-wrapper'>
         {ingredientsMenu
           .filter((m) => m.id.toString() === params.id)
@@ -28,10 +24,10 @@ const Modal: React.FC<ModalProps> = ({ onSelect, onClose }) => {
             ))
           )}
       </div>
-    </ModalWrapper>
+    </IngredientsModalWrapper>
   );
 };
-const ModalWrapper = styled.div`
+const IngredientsModalWrapper = styled.div`
     z-index: 10;
     top:3rem;
     background-color: white;
@@ -59,5 +55,3 @@ const ModalWrapper = styled.div`
         }
     }
 `;
-
-export default Modal;
