@@ -1,17 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import ingredientsMenu from "../../pages/recipe/select/data/ingredients";
 import { IngredientsModal } from "../common/modal";
-import { NavLink } from "react-router-dom";
+import Category from "../category/intex";
+
 interface SelectButtonProps {
   onSelect: (e: string) => void;
 }
-
+/**
+ * SelectButton 컴포넌트
+ *
+ * 레시피 선택 페이지에서 상단 재료 카테고리 버튼 영역을 나타냅니다.
+ * @prop {function} onSelect -사용자 선택한 재료 배열 상태 업데이트 함수
+ */
 const SelectButton: React.FC<SelectButtonProps> = ({ onSelect }) => {
   const [isOpenModal, setInOpenModal] = useState<boolean>(false);
   const [selectCategory, setSelectCategory] = useState<number>(-1);
   const modalRef = useRef<HTMLDivElement | null>(null);
-  const handleOpenModal = () => setInOpenModal(true);
+
+  const handleOpenModal = () => setInOpenModal((prev) => !prev);
   const handleCloseModal = () => setInOpenModal(false);
 
   useEffect(() => {
@@ -20,6 +27,7 @@ const SelectButton: React.FC<SelectButtonProps> = ({ onSelect }) => {
         handleCloseModal();
         setSelectCategory(-1);
       }
+      if (!isOpenModal) setSelectCategory(-1);
     };
     document.addEventListener("click", handleModal);
     return () => document.removeEventListener("click", handleModal);
@@ -29,17 +37,20 @@ const SelectButton: React.FC<SelectButtonProps> = ({ onSelect }) => {
     <SelectButtonWrapper ref={modalRef}>
       <div className='flex justify-between'>
         {ingredientsMenu.map((menu) => (
-          <Caterogory
-            to={`/recipe/select/${menu.id}`}
-            key={menu.id}
-            isSelected={selectCategory === menu.id}
-            isOpen={isOpenModal}
+          <div
+            className='category-wrapper'
             onClick={() => {
               handleOpenModal();
               setSelectCategory(menu.id);
             }}>
-            {menu.category}
-          </Caterogory>
+            <Category
+              to={`/recipe/select/${menu.id}`}
+              key={menu.id}
+              isSelectedStyle={selectCategory === menu.id}
+              isOpenStyle={isOpenModal}
+              category={menu.category}
+            />
+          </div>
         ))}
       </div>
       {isOpenModal && <IngredientsModal onSelect={onSelect} />}
@@ -53,34 +64,5 @@ width: 100%;
 height: 3rem;
 flex-direction: column;
 position: relative;
-
-`;
-const Caterogory = styled(NavLink)<{ isSelected: boolean; isOpen: boolean }>`
-  font-size:medium;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 7.7rem;
-  height: 3rem;
-  ${(props) =>
-    props.isSelected
-      ? css`
-        background-color:white;
-        font-weight: 700;
-        color:#2e4223;
-        `
-      : css`
-        background-color:#2e4223;
-        color:white;
-  `};
-  ${(props) =>
-    props.isOpen
-      ? css`
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-      `
-      : css`border-radius: 12px;`}
-  
-
 `;
 export default SelectButton;
