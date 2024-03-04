@@ -1,26 +1,44 @@
 import React from "react";
 import styled from "styled-components";
-import ingredientsMenu from "../../../pages/recipe/select/data/ingredients";
 import { useParams } from "react-router-dom";
+import IngredientItem from "../../IngredeintItem";
+import { IngredientsMenuType } from "../../../pages/recipe/select/data/ingredients";
 
 interface ModalProps {
-  // 사용자가 선택한 재료 바꾸기
-  onSelect?: (e: string) => void;
-  // 모달 닫기
-  onClose: () => void;
+  ingredientInfo: IngredientsMenuType[];
+  onToggle: (categoryId: number, ingredientName: string) => void;
+  onSelect: (ingredientName: string, categoryNumber: number) => void;
 }
-
-export const IngredientsModal: React.FC<ModalProps> = ({ onSelect, onClose }) => {
+/**
+ * IngredientsModal 컴포넌트
+ *
+ * 레시피 선택 페이지에서 카테고리의 재료를 보여주는 모달창입니다.
+ * @prop {IngredientsMenuType[]} ingredientInfo -사용자 선택한 재료 배열 상태 업데이트 함수
+ * @prop {function} onToggle -사용자 선택한 재료 배열 상태 업데이트 함수
+ * @prop {function} onSelect -사용자 선택한 재료 배열 상태 업데이트 함수
+ *
+ */
+export const IngredientsModal: React.FC<ModalProps> = ({
+  ingredientInfo,
+  onToggle,
+  onSelect,
+}) => {
   const params = useParams();
 
   return (
     <IngredientsModalWrapper>
       <div className='button-wrapper'>
-        {ingredientsMenu
+        {ingredientInfo
           .filter((m) => m.id.toString() === params.id)
           .map(({ ingredients }) =>
-            ingredients.map((ingredient) => (
-              <div className='button-item'>{`${ingredient}`}</div>
+            ingredients.map((ingredient, i) => (
+              <IngredientItem
+                key={i}
+                onSelect={onSelect}
+                id={params.id}
+                onToggle={onToggle}
+                ingredient={ingredient}
+              />
             ))
           )}
       </div>
@@ -30,28 +48,16 @@ export const IngredientsModal: React.FC<ModalProps> = ({ onSelect, onClose }) =>
 const IngredientsModalWrapper = styled.div`
     z-index: 10;
     top:3rem;
-    background-color: white;
+    background-color: #ffffff;
+    border: 1px solid #acb7a7;
     width: 100%;
     height: 15rem;
     position: absolute;
     .button-wrapper{
-        margin-top: 8px;
+        margin-top: 19px;
         margin-left: 1.5rem;
         display: flex;
         flex-wrap: wrap;
         gap:10px;
-
-        .button-item{
-            padding: 2px 2px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 6.5rem;
-            height: 2.8rem;
-            background-color: white;
-            margin-right: 0.5rem;
-            border-radius: 5px;
-            border: 1px solid #dddddd;
-        }
     }
 `;
