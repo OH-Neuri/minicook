@@ -1,10 +1,7 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { produce } from "immer";
-import ingredientsMenu, {
-  SelectedIngredients,
-  IngredientsMenuType,
-} from "./data/ingredients";
+import ingredientsMenu, { IngredientsMenuType } from "./data/ingredients";
 import CategorySelectHeader from "../../../components/categorySelectHeader";
 import RecomendRecipeView from "../../../components/recomendRecipeView";
 import IngredientsMiddleTag from "../../../components/ingredientsMiddleTag/inex";
@@ -15,9 +12,7 @@ import IngredientsMiddleTag from "../../../components/ingredientsMiddleTag/inex"
  * 레시피 선택 페이지에서 레시피 선택의 전체 영역을 차지하고 있는 컴포넌트
  */
 const RecipeSelect = () => {
-  const [selectedIngredients, setSelectedIngredients] = useState<SelectedIngredients[]>(
-    []
-  );
+  const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
   const [IngredientInfo, setIngredientInfo] =
     useState<IngredientsMenuType[]>(ingredientsMenu);
 
@@ -25,21 +20,26 @@ const RecipeSelect = () => {
    * 재료 정보 배열의 재료 클릭 상태 업데이트 하는 함수
    * {name:"대파", checked : (false <-> true)}
    *
-   * @param {number} categoryID - 카테고리 번호
    * @param {string} ingredientName - 재료명
    */
   const handleIngredientToggle = useCallback(
-    (categoryId: number, ingredientName: string) => {
+    (ingredientName: string) => {
       setIngredientInfo(
         produce((draft) => {
-          if (categoryId !== -1) {
-            const ingredientIndex = draft[categoryId].ingredients.findIndex(
+          // 해당 재료의 category 인덱스 저장
+          const categoryIndex = draft.findIndex((category) =>
+            category.ingredients.some((ingredient) => ingredient.name === ingredientName)
+          );
+
+          if (categoryIndex !== -1) {
+            // 해당 재료의 ingredients 인덱스 저장
+            const ingredientIndex = draft[categoryIndex].ingredients.findIndex(
               (ingredient) => ingredient.name === ingredientName
             );
 
             if (ingredientIndex !== -1) {
-              draft[categoryId].ingredients[ingredientIndex].checked =
-                !draft[categoryId].ingredients[ingredientIndex].checked;
+              draft[categoryIndex].ingredients[ingredientIndex].checked =
+                !draft[categoryIndex].ingredients[ingredientIndex].checked;
             }
           }
         })
@@ -47,39 +47,33 @@ const RecipeSelect = () => {
     },
     [IngredientInfo]
   );
-
-  /**
-   * 사용자가 선택한 재료 배열 업데이트 함수
-   *
-   * @param {string} ingredientName - 재료명
-   */
-  const handleSelectedIngredient = useCallback(
-    (ingredientName: string, categoryNumber: number) => {
-      setSelectedIngredients((prev) =>
-        produce(prev, (draft) => {
-          const index = draft.findIndex((item) => item.name === ingredientName);
-          if (index == -1) {
-            draft.push({ name: ingredientName, category: categoryNumber });
-          } else {
-            draft.splice(index, 1);
-          }
-        })
+  useEffect(() => {
+    /**
+     * 재료 상태 배열에서 클릭한 배열만 추출하는 함수
+     *
+     * @param {IngredientsMenuType[]} allIngredientsMenu - 재료명
+     */
+    const getAllCheckedIngredients = (
+      allIngredientsMenu: IngredientsMenuType[]
+    ): string[] => {
+      return allIngredientsMenu.flatMap((category) =>
+        category.ingredients
+          .filter((ingredient) => ingredient.checked)
+          .map((ingredient) => ingredient.name)
       );
-    },
-    [selectedIngredients]
-  );
+    };
+    setSelectedIngredients(getAllCheckedIngredients(IngredientInfo));
+  }, [IngredientInfo]);
 
   return (
     <RecipeSelectWrapper>
       <CategorySelectHeader
         ingredientInfo={IngredientInfo}
         onToggle={handleIngredientToggle}
-        onSelect={handleSelectedIngredient}
       />
       <IngredientsMiddleTag
         selectedIngredients={selectedIngredients}
         onToggle={handleIngredientToggle}
-        onSelect={handleSelectedIngredient}
       />
       {<RecomendRecipeView selectedIngredients={selectedIngredients} />}
     </RecipeSelectWrapper>
