@@ -1,12 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
-import { SelectedIngredients } from "../../pages/recipe/select/data/ingredients";
 import { AiOutlineClose } from "react-icons/ai";
 
 interface RecipeSelectTagProps {
-  selectedIngredients: SelectedIngredients[];
-  onSelect: (ingredientName: string, categoryNumber: number) => void;
-  onToggle: (categoryId: number, ingredientName: string) => void;
+  selectedIngredients: string[];
+  onToggle: (ingredientName: string) => void;
 }
 
 /**
@@ -20,16 +18,14 @@ interface RecipeSelectTagProps {
 const IngredientsMiddleTag: React.FC<RecipeSelectTagProps> = ({
   selectedIngredients,
   onToggle,
-  onSelect,
 }) => {
   //const [tagContainerWidth, setTagContainerWidth] = useState<number>(0);
   //const [leftButton, setLeftButton] = useState<number>(0);
   //const [rightButton, setRightButton] = useState<number>(0);
   const tagContainerRef = useRef<HTMLDivElement | null>(null);
 
-  const handleButton = (ingredient: string, category: number) => {
-    ingredient && onToggle(category, ingredient);
-    ingredient && onSelect(ingredient, category);
+  const handleButton = (ingredientName: string) => {
+    ingredientName && onToggle(ingredientName);
   };
 
   //useEffect(() => {
@@ -39,19 +35,16 @@ const IngredientsMiddleTag: React.FC<RecipeSelectTagProps> = ({
 
   return (
     <RecipeSelectTagWrapper>
-      {<div className='tag-button'></div>}
+      {/*{<div className='tag-button'></div>}*/}
       <div className='tag-container' ref={tagContainerRef}>
         {selectedIngredients.map((ingredient, i) => (
-          <div
-            key={i}
-            className='tag'
-            onClick={() => handleButton(ingredient.name, ingredient.category)}>
+          <div key={i} className='tag' onClick={() => handleButton(ingredient)}>
             <AiOutlineClose /> &nbsp;
-            {`${ingredient.name}`}
+            {`${ingredient}`}
           </div>
         ))}
       </div>
-      {<div className='tag-button'></div>}
+      {/*{<div className='tag-button'></div>}*/}
     </RecipeSelectTagWrapper>
   );
 };
