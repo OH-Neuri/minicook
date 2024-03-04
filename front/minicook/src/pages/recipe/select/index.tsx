@@ -47,22 +47,40 @@ const RecipeSelect = () => {
     },
     [IngredientInfo]
   );
-  useEffect(() => {
-    /**
-     * 재료 상태 배열에서 클릭한 배열만 추출하는 함수
-     *
-     * @param {IngredientsMenuType[]} allIngredientsMenu - 재료명
-     */
-    const getAllCheckedIngredients = (
-      allIngredientsMenu: IngredientsMenuType[]
-    ): string[] => {
-      return allIngredientsMenu.flatMap((category) =>
-        category.ingredients
-          .filter((ingredient) => ingredient.checked)
-          .map((ingredient) => ingredient.name)
+
+  /**
+   * 재료 상태 배열에서 클릭한 배열만 추출하는 함수
+   *  true, 배열에 없는 경우 => 배열에 추가
+   *  false, 배열에 있는 경우 => 배열에서 삭제
+   * @param {IngredientsMenuType[]} allIngredientsMenu - 재료명
+   */
+  const handleSelectedIngredients = useCallback(
+    (allIngredientsMenu: IngredientsMenuType[]) => {
+      setSelectedIngredients(
+        produce((draft) => {
+          allIngredientsMenu.forEach((category, categoryIndex) => {
+            category.ingredients.forEach((ingredient, ingredientIndex) => {
+              // 재료를 선택했을 경우
+              if (ingredient.checked && !selectedIngredients.includes(ingredient.name)) {
+                draft.push(ingredient.name);
+              } else if (
+                !ingredient.checked &&
+                selectedIngredients.includes(ingredient.name)
+              ) {
+                draft.splice(
+                  draft.findIndex((name) => name === ingredient.name),
+                  1
+                );
+              }
+            });
+          });
+        })
       );
-    };
-    setSelectedIngredients(getAllCheckedIngredients(IngredientInfo));
+    },
+    [selectedIngredients]
+  );
+  useEffect(() => {
+    handleSelectedIngredients(IngredientInfo);
   }, [IngredientInfo]);
 
   return (
