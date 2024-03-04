@@ -8,8 +8,7 @@ import Category from "../category/intex";
 
 interface SelectButtonProps {
   ingredientInfo: IngredientsMenuType[];
-  onToggle: (categoryId: number, ingredientName: string) => void;
-  onSelect: (ingredientName: string, categoryNumber: number) => void;
+  onToggle: (ingredientName: string) => void;
 }
 
 /**
@@ -23,7 +22,6 @@ interface SelectButtonProps {
 const CategorySelectHeader: React.FC<SelectButtonProps> = ({
   ingredientInfo,
   onToggle,
-  onSelect,
 }) => {
   const [isOpenModal, setInOpenModal] = useState<boolean>(false);
   const [selectCategory, setSelectCategory] = useState<number>(-1);
@@ -78,11 +76,7 @@ const CategorySelectHeader: React.FC<SelectButtonProps> = ({
         ))}
       </div>
       {isOpenModal && (
-        <IngredientsModal
-          ingredientInfo={ingredientInfo}
-          onToggle={onToggle}
-          onSelect={onSelect}
-        />
+        <IngredientsModal ingredientInfo={ingredientInfo} onToggle={onToggle} />
       )}
     </RecipeSelectHeaderWrapper>
   );

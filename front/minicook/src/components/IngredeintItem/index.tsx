@@ -4,9 +4,7 @@ import { IngredientType } from "../../pages/recipe/select/data/ingredients";
 
 interface IngredientItemProps {
   ingredient: IngredientType;
-  onSelect: (ingredientName: string, categoryNumber: number) => void;
-  onToggle: (id: number, name: string) => void;
-  id?: string;
+  onToggle: (ingredientName: string) => void;
 }
 /**
  * IngredientItem 컴포넌트
@@ -15,18 +13,11 @@ interface IngredientItemProps {
  * @prop {IngredientType} ingredient - 재료의 제목과 체크 상황을 저장하고 있는 재료 객체
  * @prop {funcion} onSelect - 사용자가 선택한 재료 배열의 상태를 업데이트 하는 함수
  * @prop {funtion} onToggle - 재료 정보 배열 상태에서 재료의 클릭 상태를 업데이트 하는 함수
- * @prop {string} id - 카테고리 번호
  */
-const IngredientItem: React.FC<IngredientItemProps> = ({
-  onSelect,
-  onToggle,
-  ingredient,
-  id,
-}) => {
+const IngredientItem: React.FC<IngredientItemProps> = ({ onToggle, ingredient }) => {
   const { name, checked } = ingredient;
   const handleToggle = () => {
-    name && id && onSelect(name, parseInt(id));
-    id && onToggle(parseInt(id), name);
+    name && onToggle(name);
   };
 
   return (
@@ -35,6 +26,7 @@ const IngredientItem: React.FC<IngredientItemProps> = ({
     </IngredientItemWrapper>
   );
 };
+
 const IngredientItemWrapper = styled.div<{ $isChecked: boolean }>`
     .item{
         padding: 2px 2px;

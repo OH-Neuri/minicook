@@ -6,8 +6,7 @@ import { IngredientsMenuType } from "../../../pages/recipe/select/data/ingredien
 
 interface ModalProps {
   ingredientInfo: IngredientsMenuType[];
-  onToggle: (categoryId: number, ingredientName: string) => void;
-  onSelect: (ingredientName: string, categoryNumber: number) => void;
+  onToggle: (ingredientName: string) => void;
 }
 /**
  * IngredientsModal 컴포넌트
@@ -18,11 +17,7 @@ interface ModalProps {
  * @prop {function} onSelect -사용자 선택한 재료 배열 상태 업데이트 함수
  *
  */
-export const IngredientsModal: React.FC<ModalProps> = ({
-  ingredientInfo,
-  onToggle,
-  onSelect,
-}) => {
+export const IngredientsModal: React.FC<ModalProps> = ({ ingredientInfo, onToggle }) => {
   const params = useParams();
 
   return (
@@ -32,19 +27,14 @@ export const IngredientsModal: React.FC<ModalProps> = ({
           .filter((m) => m.id.toString() === params.id)
           .map(({ ingredients }) =>
             ingredients.map((ingredient, i) => (
-              <IngredientItem
-                key={i}
-                onSelect={onSelect}
-                id={params.id}
-                onToggle={onToggle}
-                ingredient={ingredient}
-              />
+              <IngredientItem key={i} onToggle={onToggle} ingredient={ingredient} />
             ))
           )}
       </div>
     </IngredientsModalWrapper>
   );
 };
+
 const IngredientsModalWrapper = styled.div`
     z-index: 10;
     top:3rem;
