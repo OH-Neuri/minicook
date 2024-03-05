@@ -85,15 +85,19 @@ const RecipeSelect = () => {
 
   return (
     <RecipeSelectWrapper>
-      <CategorySelectHeader
-        ingredientInfo={IngredientInfo}
-        onToggle={handleIngredientToggle}
-      />
-      <IngredientsMiddleTag
-        selectedIngredients={selectedIngredients}
-        onToggle={handleIngredientToggle}
-      />
-      {<RecomendRecipeView selectedIngredients={selectedIngredients} />}
+      <div className='select-header'>
+        <CategorySelectHeader
+          ingredientInfo={IngredientInfo}
+          onToggle={handleIngredientToggle}
+        />
+        <IngredientsMiddleTag
+          selectedIngredients={selectedIngredients}
+          onToggle={handleIngredientToggle}
+        />
+      </div>
+      <div className='select-view'>
+        {<RecomendRecipeView selectedIngredients={selectedIngredients} />}
+      </div>
     </RecipeSelectWrapper>
   );
 };
@@ -104,8 +108,17 @@ display: flex;
 flex-direction: column;
 gap:1rem;
 width:100%;
-height: 85vh;
-padding: 3.5rem 30% 6rem 30%;
+height: 90vh;
+padding: 3.5rem 23% 6rem 23%;
+.select-header{
+  width: 100%;
+  height: 22%;
+  padding: 0 13%;
+}
+  .select-view{
+  width: 100%;
+  height: 78%;
+}
 `;
 
 export default RecipeSelect;
