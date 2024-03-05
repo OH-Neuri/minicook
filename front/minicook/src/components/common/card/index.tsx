@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import Recipe from "../../../data/type/recipe";
 import Tag from "../tag";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { TiHeart } from "react-icons/ti";
 import { formatNumberWithCommas } from "../../../utils/formatNumberWithCommas";
 interface ReacipeCardProps {
@@ -13,9 +13,10 @@ export const RecipeCard: React.FC<ReacipeCardProps> = ({ recipe, detail }) => {
   const { id, name, like, ingredients, thumbnail } = recipe;
   const formatLike = formatNumberWithCommas(like);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const navigateToPage = () => {
-    navigate(`/recipe/${id}`);
+    navigate(`/recipe?id=${id}&page=${1}`);
   };
 
   return (
