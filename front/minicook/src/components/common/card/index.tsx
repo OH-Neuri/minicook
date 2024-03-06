@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import Recipe from "../../../data/type/recipe";
-import Tag from "../tag";
+import Badge from "../badge";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TiHeart } from "react-icons/ti";
 import { formatNumberWithCommas } from "../../../utils/formatNumberWithCommas";
@@ -37,7 +37,7 @@ export const RecipeCard: React.FC<ReacipeCardProps> = ({ recipe, detail }) => {
           ))}
           {like > 100 && (
             <div className='card-tag'>
-              <Tag tagText='인기' bgColor='#ffa600' size='3rem' />
+              <Badge tagText='인기' bgColor='#ffa600' size='3rem' />
             </div>
           )}
         </div>
