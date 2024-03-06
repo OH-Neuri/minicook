@@ -15,7 +15,7 @@ interface RecipeSelectTagProps {
  * @prop {function} onToggle -사용자가 선택한 재료 클릭 상태 업데이트 함수
  * @prop {function} onSelect -사용자가 선택한 재료 배열 상태 업데이트 함수
  */
-const IngredientsMiddleTag: React.FC<RecipeSelectTagProps> = ({
+const IngredientsMiddleBadge: React.FC<RecipeSelectTagProps> = ({
   selectedIngredients,
   onToggle,
 }) => {
@@ -52,7 +52,7 @@ const RecipeSelectTagWrapper = styled.div`
 display: flex;
 width: 100%;
 padding: 0 3%;
-margin-top: 5px;
+margin-top: 1.3rem;
 height: 3.5rem;
 overflow-x: hidden;
 
@@ -77,4 +77,4 @@ overflow-x: hidden;
   }
 
 `;
-export default IngredientsMiddleTag;
+export default IngredientsMiddleBadge;
