@@ -41,8 +41,9 @@ const IngredientsModalWrapper = styled.div`
     background-color: #ffffff;
     border: 1px solid #acb7a7;
     width: 100%;
-    height: 15rem;
+    height: 13rem;
     position: absolute;
+    overflow-y: scroll;
     .button-wrapper{
         margin-top: 19px;
         margin-left: 1.5rem;
