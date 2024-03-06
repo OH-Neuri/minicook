@@ -11,9 +11,9 @@ const Routers = () => {
     <>
       <Routes>
         <Route path='/' element={<Main />} />
-        <Route path='/recipe' element={<RecipeDetailPage />} />
-        <Route path='/recipe/select' element={<RecipeSelect />} />
-        <Route path='/recipe/select/:id' element={<RecipeSelect />} />
+        <Route path='/recipe/:id?' element={<RecipeDetailPage />} />
+        {/*<Route path='/recipe/select' element={<RecipeSelect />} />*/}
+        <Route path='/recipe/select/:id?' element={<RecipeSelect />} />
         <Route path='/mypage' element={<MyPage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/recipe/select' element={<Logout />} />
