@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FaStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { formatNumberWithCommas } from "../../../utils/formatNumberWithCommas";
 interface SearchBarItemProps {
   id: number;
   name: string;
@@ -9,17 +10,15 @@ interface SearchBarItemProps {
   ingredients: string[];
 }
 
-const formatNumberWithCommas = (like: number) => {
-  return like.toLocaleString();
-};
-
 const SearchBarItem: React.FC<SearchBarItemProps> = ({ id, name, like, ingredients }) => {
   const navigate = useNavigate();
-
+  const navigateToPage = () => {
+    navigate(`/recipe?id=${id}&page=1`);
+  };
   return (
     <SearchBarItemWrapper
       className='hover:bg-[#cdc8c0] hover:cursor-pointer'
-      onClick={() => navigate(`/recipe/${id}`)}>
+      onClick={navigateToPage}>
       <div className='search-bar-item-header'>
         <div className='search-bar-item-name'>{name}</div>
         <div className='search-bar-item-like'>
