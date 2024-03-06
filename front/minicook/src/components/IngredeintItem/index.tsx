@@ -33,7 +33,7 @@ const IngredientItemWrapper = styled.div<{ $isChecked: boolean }>`
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 6.6rem;
+        width: 6.5rem;
         height: 2.8rem;
         margin-right: 0.5rem;
         border-radius: 5px;
@@ -44,7 +44,7 @@ const IngredientItemWrapper = styled.div<{ $isChecked: boolean }>`
           props.$isChecked
             ? css`
             background-color:#3c721d;
-            border-bottom : 6px solid #aedd02 ;
+            border-bottom : 6px solid #7b9d01 ;
             `
             : css`
             background-color:#85a996;
