@@ -4,7 +4,7 @@ import { produce } from "immer";
 import ingredientsMenu, { IngredientsMenuType } from "./data/ingredients";
 import CategorySelectHeader from "../../../components/categorySelectHeader";
 import RecomendRecipeView from "../../../components/recomendRecipeView";
-import IngredientsMiddleTag from "../../../components/ingredientsMiddleTag/inex";
+import IngredientsMiddleBadge from "../../../components/ingredientsMiddleBadge/inex";
 
 /**
  * RecipeSelect 컴포넌트
@@ -90,7 +90,7 @@ const RecipeSelect = () => {
           ingredientInfo={IngredientInfo}
           onToggle={handleIngredientToggle}
         />
-        <IngredientsMiddleTag
+        <IngredientsMiddleBadge
           selectedIngredients={selectedIngredients}
           onToggle={handleIngredientToggle}
         />
