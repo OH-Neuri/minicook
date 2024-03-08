@@ -1,22 +1,57 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { formType } from "../../container/auth/type";
+
 interface AuthFormProps {
+  form: formType;
   type: string;
+  auth: boolean;
+  error: string;
+  onChange: (name: string, value: string) => void;
+  onSubmit: () => void;
 }
-const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
+const AuthForm: React.FC<AuthFormProps> = ({
+  form,
+  type,
+  auth,
+  error,
+  onChange,
+  onSubmit,
+}) => {
+  const navigate = useNavigate();
   const textMap: { [key: string]: string } = { login: "로그인", register: "회원가입" };
   const text = textMap[type];
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    onChange(name, value);
+  };
+
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onSubmit();
+    //onSubmit();
+  };
+
   return (
     <AuthFormWrapper>
       <h3>{text}</h3>
-      <form>
-        <StyledInput autoComplete='username' name='username' placeholder='아이디' />
+      <form onSubmit={handleSubmit}>
+        <StyledInput
+          autoComplete='email'
+          name='email'
+          placeholder='아이디'
+          onChange={handleChange}
+          value={form.email}
+        />
         <StyledInput
           autoComplete='new-password'
           name='password'
           placeholder='비밀번호'
           type='password'
+          onChange={handleChange}
+          value={form.password}
         />
         {type === "register" && (
           <StyledInput
@@ -24,10 +59,15 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
             name='passwordConfirm'
             placeholder='비밀번호 확인'
             type='password'
+            onChange={handleChange}
+            value={form.passwordConfirm}
           />
         )}
-        <button className='button'>{text}</button>
+        <StyledButton type='submit' className='button'>
+          {text}
+        </StyledButton>
       </form>
+
       <div className='footer'>
         {type === "login" ? (
           <Link to='/register'>회원가입</Link>
@@ -49,18 +89,6 @@ h3{
     
 }
 
-.button{
-    width: 100%;
-    margin-top: 2rem;
-    background-color: #476801;
-    border-radius: 5px;
-    color:white;
-    height: 3rem;
-    &:hover{
-        background-color: #365000;
-    }
-}
-
 .footer{
     margin-top: 2rem;
     text-align:center;
@@ -72,6 +100,18 @@ h3{
         }
     }
 }
+`;
+
+const StyledButton = styled.button`
+    width: 100%;
+    margin-top: 2rem;
+    background-color: #476801;
+    border-radius: 5px;
+    color:white;
+    height: 3rem;
+    &:hover{
+        background-color: #365000;
+    }
 `;
 
 const StyledInput = styled.input`
