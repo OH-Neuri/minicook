@@ -22,6 +22,7 @@ const LoginFrom: React.FC<LoginFromProps> = ({ type }) => {
     email: "",
     password: "",
     passwordConfirm: "",
+    name: "",
   });
 
   const handleChange = (name: string, value: string) => {
@@ -46,7 +47,7 @@ const LoginFrom: React.FC<LoginFromProps> = ({ type }) => {
 
   // 컴포넌트가 처음 렌더링될 때 form을 초기화함
   useEffect(() => {
-    setForm({ email: "", password: "", passwordConfirm: "" });
+    setForm({ email: "", password: "", passwordConfirm: "", name: "" });
   }, []);
 
   // 로그인 성공/실패 처리

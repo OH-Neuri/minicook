@@ -11,6 +11,7 @@ export const getUser = createAsyncThunk(`user/getUser`, async () => {
 export const initialState: UserType = {
   userId: 0,
   user: null,
+  name: "",
   email: "",
   userGetLoading: false,
   userGetError: false,

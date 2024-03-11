@@ -19,6 +19,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ type }) => {
     email: "",
     password: "",
     passwordConfirm: "",
+    name: "",
   });
   const handleButton = () => setRegisterSuccess(false);
   const handleChange = (name: string, value: string) => {
@@ -63,7 +64,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ type }) => {
 
   // 컴포넌트가 처음 렌더링될 때 form을 초기화함
   useEffect(() => {
-    setForm({ email: "", password: "", passwordConfirm: "" });
+    setForm({ email: "", password: "", passwordConfirm: "", name: "" });
   }, []);
 
   // 로그인 성공/실패 처리
