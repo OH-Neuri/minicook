@@ -17,9 +17,9 @@ import Recipe from "../../data/type/recipe";
 
 const UserLikedRecipesContainer = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const recipes: RecipeType[] = useSelector((state: RootState) => state.userLiked.recipe);
+  //const recipes: RecipeType[] = useSelector((state: RootState) => state.userLiked.recipe);
   const user = useSelector((state: RootState) => state.user);
-  const modify = useSelector((state: RootState) => state.userLiked.modify);
+  //const modify = useSelector((state: RootState) => state.userLiked.modify);
 
   // api 연동하기 전에 임시로 상태 만들어서 테스트
   const [tempRecipes, setTempRecipes] = useState<Recipe[]>([]);
@@ -27,37 +27,38 @@ const UserLikedRecipesContainer = () => {
   //const [modify, setModify] = useState<boolean>(false);
 
   // 정렬 버튼
-  const handleSortTab = (tabNumber: number) => {
+  const handleSortTab = useCallback((tabNumber: number) => {
     dispatch(getLikedRecipesDate(tabNumber));
-  };
+  }, []);
   // 삭제 버튼
-  const handleDeleteButton = (removeIndex: number[]) => {
+  const handleDeleteButton = useCallback((removeIndex: number[]) => {
     dispatch(removeLikedRecipes(removeIndex));
-    // removeLikedRecipes는 비동기 액션 크리에이터이므로 dispatch를 통해 호출해야 합니다.
-  };
+  }, []);
   // 정렬 탭 버튼
-  const handleTab = (tabNumber: number) => {
+  const handleTab = useCallback((tabNumber: number) => {
     dispatch(setTab(tabNumber));
-    //setTab(tabNumber);
-  };
+  }, []);
   // 수정 버튼
-  const handleModifyButton = () => {
+  const handleModifyButton = useCallback(() => {
     dispatch(setModify());
-    //setModify((prev) => !prev);
-  };
-
-  // 지울거임
-  // api연동 전이라 기존 recipe 데이터에서 사용자가 좋아요한 레시피들만 필터링하겠음
-  const handleFilterdRecipe = useCallback((likedRecipesIndexArray: number[]) => {
-    const filteredRecipes = recipe.filter((r) =>
-      likedRecipesIndexArray.some((i) => r.id === i)
-    );
-    setTempRecipes(filteredRecipes);
   }, []);
 
   // 지울거임
+  // api연동 전이라 기존 recipe 데이터에서 사용자가 좋아요한 레시피들만 필터링하겠음
+  const handleFilterdRecipe = useCallback(
+    (likedRecipesIndexArray: number[]) => {
+      const filteredRecipes = recipe.filter((r) =>
+        likedRecipesIndexArray.some((i) => r.id === i)
+      );
+      setTempRecipes(filteredRecipes);
+    },
+    [recipe]
+  );
+
   // 처음에 보여줄 레시피 초기화하기
   useEffect(() => {
+    // 페이지 들어오면 사용자 좋아요 레시피 불러오기 api
+    // 아래 함수는 삭제할 예쩡
     handleFilterdRecipe(user.likeRecipe);
   }, []);
 
