@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import part1Image from "./assets/main_page_image1.svg";
-import { WiDirectionRight } from "react-icons/wi";
-import { BsChevronLeft } from "react-icons/bs";
-import { BsChevronRight } from "react-icons/bs";
-import recipe from "../../data/recipe";
 import { useRef } from "react";
-import { FaCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+
+import recipe from "../../data/recipe";
+import part1Image from "./assets/main_page_image1.svg";
+import styled from "styled-components";
+
+import { WiDirectionRight } from "@react-icons/all-files/wi/WiDirectionRight";
+import { BsChevronLeft } from "@react-icons/all-files/bs/BsChevronLeft";
+import { BsChevronRight } from "@react-icons/all-files/bs/BsChevronRight";
+import { FaCircle } from "@react-icons/all-files/fa/FaCircle";
 
 const Main = () => {
   const [index, setIndex] = useState<number>(0);
@@ -201,11 +203,15 @@ height: 197vh;
       justify-content: space-around;
       width: 13rem;
       height: 2.5rem;
-      background-color: #283618;
+      background-color: #436000;
       border-radius: 10px;
       border: 2px solid #283618;
       margin-top: 2.75rem;
       padding-left: 5px;
+      &:hover{
+        background-color: #294d00;
+      }
+
       > span{
         font-size: smaller;
         color:white

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Recipe from "../../../data/type/recipe";
-import { GoPlus } from "react-icons/go";
+import { GoPlus } from "@react-icons/all-files/go/GoPlus";
 export const button = ({}) => {
   return <div>Button</div>;
 };
