@@ -18,8 +18,10 @@ const RecipeIngredients: React.FC<RecipeIngredientsProps> = ({ ingredients }) =>
       <div className='content'>
         - 필수 재료
         <div className='content-ingredients'>
-          {ingredients.map((ingredient) => (
-            <div className='font-medium text-gray-500'>{`${ingredient}, `}&nbsp;</div>
+          {ingredients.map((ingredient, i) => (
+            <div key={i} className='font-medium text-gray-500'>
+              {`${ingredient}, `}&nbsp;
+            </div>
           ))}
         </div>
       </div>
