@@ -1,11 +1,11 @@
 interface UserType {
-  userId: Number;
+  userId: number;
   user: boolean | null;
-  name: String;
-  email: String;
+  name: string;
+  email: string;
   userGetLoading: boolean;
-  userGetError: String | boolean;
-  likeRecipe: String[];
+  userGetError: string | boolean;
+  likeRecipe: number[];
 }
 
 export default UserType;

@@ -11,11 +11,11 @@ export const getUser = createAsyncThunk(`user/getUser`, async () => {
 export const initialState: UserType = {
   userId: 0,
   user: null,
-  name: "",
+  name: "오종석",
   email: "",
   userGetLoading: false,
   userGetError: false,
-  likeRecipe: [],
+  likeRecipe: [4, 5, 6, 7, 8, 10, 11, 22, 23],
 };
 
 const userSlice = createSlice({
@@ -42,6 +42,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { tempSetUser } = userSlice.actions;
+export const { tempSetUser, setEmail } = userSlice.actions;
 
 export default userSlice.reducer;
