@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 
-import RecipeDetail from "../../../components/recipeDetail";
-import RecipeCard from "../../../components/common/card";
+import RecipeDetail from "../../../components/recipe/recipeDetail";
+import RecipeCard from "../../../components/recipe/recipeCard";
 import Recipe from "../../../data/type/recipe";
 import recipe from "../../../data/recipe";
 import { RecipeLikeButton } from "../../../components/common/button";
-import RecipeIngredients from "../../../components/recipeIngredients";
+import RecipeIngredients from "../../../components/recipe/recipeIngredients";
 
 const RecipeDetailPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -34,6 +34,7 @@ const RecipeDetailPage = () => {
 
   useEffect(() => {
     setcurrentRecipe(recipe[recipeId]);
+    window.scrollTo(0, 0);
   }, [searchParams]);
 
   return (
@@ -49,7 +50,7 @@ const RecipeDetailPage = () => {
 };
 const RecipeDetailPageBlock = styled.div`
 width: 100%;
-height: 90vh;
+height: 80vh;
 padding: 3.5rem 20% 6rem 20%;
 background-color: #F4F1EB;
 display: flex;
