@@ -5,7 +5,7 @@ import { formType } from "./type";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { tempSetUser } from "../../store/reducers/user";
+import { setEmail, tempSetUser } from "../../store/reducers/user";
 
 interface LoginFromProps {
   type: string;
@@ -37,10 +37,11 @@ const LoginFrom: React.FC<LoginFromProps> = ({ type }) => {
       return;
     }
     // 로그인 api
-    if (form.email === "js@asd.co" && form.password === "1234") {
+    if (form.email === "js@asd.co" && form.password === "qq11!") {
       setAuth(true);
     } else {
       // 로그인 성공 setAuth(true)
+      alert("로그인 실패 ~~");
     }
     // 로그인 실패 setAuthError(실패결과)
   };
@@ -64,6 +65,7 @@ const LoginFrom: React.FC<LoginFromProps> = ({ type }) => {
     if (auth) {
       alert("로그인 성공");
       dispatch(tempSetUser(true));
+      dispatch(setEmail(form.email));
     }
   }, [auth, authError]);
 
