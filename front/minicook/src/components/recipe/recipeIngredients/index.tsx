@@ -4,7 +4,13 @@ import styled from "styled-components";
 interface RecipeIngredientsProps {
   ingredients: string[];
 }
-
+/**
+ * RecipeIngredients 컴포넌트
+ *
+ * props로 받은 레시피의 재료를 보여주는 프레젠테이션 컴포넌트입니다.
+ * @prop {string[]} ingredients - 화면에 보여줄 레시피
+ *
+ */
 const RecipeIngredients: React.FC<RecipeIngredientsProps> = ({ ingredients }) => {
   return (
     <RecipeIngredientsBlock>
@@ -12,8 +18,10 @@ const RecipeIngredients: React.FC<RecipeIngredientsProps> = ({ ingredients }) =>
       <div className='content'>
         - 필수 재료
         <div className='content-ingredients'>
-          {ingredients.map((ingredient) => (
-            <div className='font-medium text-gray-500'>{`${ingredient}, `}&nbsp;</div>
+          {ingredients.map((ingredient, i) => (
+            <div key={i} className='font-medium text-gray-500'>
+              {`${ingredient}, `}&nbsp;
+            </div>
           ))}
         </div>
       </div>

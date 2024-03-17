@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { FaStar } from "react-icons/fa";
+import { FaStar } from "@react-icons/all-files/fa/FaStar";
 import { useNavigate } from "react-router-dom";
 import { formatNumberWithCommas } from "../../../utils/formatNumberWithCommas";
 interface SearchBarItemProps {

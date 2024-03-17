@@ -1,6 +1,6 @@
-import { FaGithub } from "react-icons/fa";
-import { FaGoogle } from "react-icons/fa";
-import { RiKakaoTalkFill } from "react-icons/ri";
+import { FaGithub } from "@react-icons/all-files/fa/FaGithub";
+import { FaGoogle } from "@react-icons/all-files/fa/FaGoogle";
+import { RiKakaoTalkFill } from "@react-icons/all-files/ri/RiKakaoTalkFill";
 import FooterTab from "../type/type";
 
 const info: FooterTab[] = [

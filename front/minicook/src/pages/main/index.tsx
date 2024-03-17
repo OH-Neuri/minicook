@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import part1Image from "./assets/main_page_image1.svg";
-import { WiDirectionRight } from "react-icons/wi";
-import { BsChevronLeft } from "react-icons/bs";
-import { BsChevronRight } from "react-icons/bs";
-import recipe from "../../data/recipe";
 import { useRef } from "react";
-import { FaCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+
+import recipe from "../../data/recipe";
+import part1Image from "./assets/mainPage_frying_pan.svg";
+import styled from "styled-components";
+
+import { WiDirectionRight } from "@react-icons/all-files/wi/WiDirectionRight";
+import { BsChevronLeft } from "@react-icons/all-files/bs/BsChevronLeft";
+import { BsChevronRight } from "@react-icons/all-files/bs/BsChevronRight";
+import { FaCircle } from "@react-icons/all-files/fa/FaCircle";
 
 const Main = () => {
   const [index, setIndex] = useState<number>(0);
@@ -26,7 +28,7 @@ const Main = () => {
 
   useEffect(() => {
     if (carouselImageRef.current != null) {
-      carouselImageRef.current.style.transform = `translateX(-${index * 570.11}px)`;
+      carouselImageRef.current.style.transform = `translateX(-${index * 573.8}px)`;
     }
   }, [index]);
 
@@ -70,13 +72,14 @@ const Main = () => {
           <span className='text-amber-300 text-2xl font-bold shadow-gray-600'>TOP 4</span>
         </div>
         <div className='main-part02-image'>
-          {recipe.slice(0, 4).map(({ id, name, thumbnail }, v) => (
+          {recipe.slice(0, 4).map(({ id, thumbnail }, v) => (
             <div
+              key={id}
               className='main-part02-image-box hover:cursor-pointer'
               onClick={() => {
                 navigate(`/recipe/${id}`);
               }}>
-              <img src={thumbnail} width={220} height={220} />
+              <img src={thumbnail} width={220} height={220} alt='recipe' />
               <span className='main-part02-image-rank'>{`${v + 1}`}</span>
             </div>
           ))}
@@ -97,42 +100,44 @@ const Main = () => {
           </div>
         </div>
 
-        <button className='ml-10 ' type='button' onClick={(e) => prevClick(e)}>
+        <button
+          className='ml-10'
+          aria-label='Carousel Left'
+          onClick={(e) => prevClick(e)}>
           <BsChevronLeft size={20} />
         </button>
 
         <div className='main-part03-carousel-wrapper'>
           <div className='carousel' ref={carouselImageRef}>
-            {recipe.map(({ id, thumbnail }) => (
+            {recipe.slice(0, 4).map(({ id, thumbnail }) => (
               // eslint-disable-next-line jsx-a11y/alt-text
-              <img
-                className='rounded-xl'
-                key={id}
-                src={thumbnail}
-                width={80}
-                height={40}></img>
+              <img className='rounded-xl' key={id} src={thumbnail} alt='Recipe' />
             ))}
           </div>
           <div className='flex mt-3'>
-            {[0, 1, 2, 3].map((v) =>
-              index === v ? <FaCircle fill={"#4d4435"} /> : <FaCircle fill={"#c9c1b1"} />
-            )}
+            {[0, 1, 2, 3].map((v, i) => (
+              <CircleIcon key={i} $active={index === v} />
+            ))}
           </div>
         </div>
-        <button className='' type='button' onClick={(e) => nextClick(e)}>
+        <button aria-label='Carousel Right' onClick={(e) => nextClick(e)}>
           <BsChevronRight size={20} />
         </button>
       </div>
     </MainWrapper>
   );
 };
+const CircleIcon = styled(FaCircle)<{ $active: boolean }>`
+  fill: ${({ $active }) => ($active ? "#4d4435" : "#c9c1b1")};
+`;
 
 const MainWrapper = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
-color: white;
-height: 197vh;
+
+
+
 
   .main-part03{
     padding: 11rem 25% 8rem 25%;
@@ -149,11 +154,13 @@ height: 197vh;
 
     .main-part03-carousel-wrapper{
       height: 28rem;
-      width: 60%;
+      width: 35.9rem;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
+      background-size: cover;
+      object-fit: cover;
       > .carousel{
         padding-left: 3px;
         width: 36rem;
@@ -161,11 +168,6 @@ height: 197vh;
         display: flex;
         transform: translateX(0px);
         transition : transform 0.2s;
-
-        > img {
-          width: 36rem;
-          height: 25rem;
-        }
       }
     }
       > button{
@@ -201,11 +203,14 @@ height: 197vh;
       justify-content: space-around;
       width: 13rem;
       height: 2.5rem;
-      background-color: #283618;
+      background-color: #455631;
       border-radius: 10px;
-      border: 2px solid #283618;
       margin-top: 2.75rem;
       padding-left: 5px;
+      &:hover{
+        background-color: #324222;
+      }
+
       > span{
         font-size: smaller;
         color:white
