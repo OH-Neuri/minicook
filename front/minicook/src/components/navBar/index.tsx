@@ -1,21 +1,14 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import SearchBarInput from "../searchBarInput";
-import tab from "./data/data";
-import { useNavigate } from "react-router-dom";
+import SearchBarInput from "../search/searchBarInput";
+import { Link } from "react-router-dom";
 import recipe from "../../data/recipe";
-import SearchBarInfo from "../searchBarInfo";
+import SearchBarInfo from "../search/searchBarInfo";
 
 const NavBar = () => {
   const [navBarOpen, setNavBarOpen] = useState<boolean>(false);
   const navbarInfoRef = useRef<HTMLDivElement | null>(null);
   const [input, setInput] = useState<string>("");
-  const navigate = useNavigate();
-
-  const changePage = (e: React.MouseEvent<HTMLDivElement>) => {
-    const page = e.currentTarget.dataset.id;
-    navigate(`/${page}`);
-  };
 
   const handleOpenSearchBar = () => setNavBarOpen(true);
   const handleCloseSearchBar = () => setNavBarOpen(false);
@@ -30,27 +23,17 @@ const NavBar = () => {
         navBarOpen &&
         navbarInfoRef.current &&
         !navbarInfoRef.current.contains(e.target)
-      ) {
+      )
         handleCloseSearchBar();
-      }
     };
     document.addEventListener("click", handler);
+    return () => document.removeEventListener("click", handler);
   }, [navBarOpen]);
 
   return (
     <NavBarWrapper>
-      <div className='navbar-info'>
-        <div className='navbar-list'>
-          {tab.map(({ title, link }) => (
-            <div
-              className='navbar-items'
-              key={title}
-              data-id={link}
-              onClick={(e) => changePage(e)}>
-              {title}
-            </div>
-          ))}
-        </div>
+      <Section>
+        <StyledLink to='/recipe/select'>레시피 선택</StyledLink>
         <div className='navbar-search-wrapper' ref={navbarInfoRef}>
           <SearchBarInput
             onChangeInput={handleInput}
@@ -58,52 +41,62 @@ const NavBar = () => {
           />
           {navBarOpen && <SearchBarInfo input={input} recipe={recipe} />}
         </div>
-        <div className='navbar-text'>#대파 #삼겹살 #김밥</div>
-      </div>
+        <StyledText>#대파#삼겹살#김밥</StyledText>
+      </Section>
     </NavBarWrapper>
   );
 };
 
 const NavBarWrapper = styled.div`
-  height:3.3rem;
-  width : 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
   border-top :  1.8px solid #fffbf5;
   border-bottom:  1.8px solid #fffbf5;
   background-color:white;
+`;
+
+const Section = styled.div`
+height:60px;
+width: 100%;
+max-width: 1200px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 0px 20px;
+
   .navbar-search-wrapper{
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
     flex-direction: column;
-    position:relative;
-  }
-  .navbar-info{
-    width: 60%;
-    display: flex;
     align-items: center;
-    justify-content: space-between;
   }
+`;
 
-  .navbar-text{
-    font-size: small;
-    width: 25%;
-    justify-content: end;
-    display: flex;
-    color:gray;
-    font-weight: 300;
-  }
-
-  .navbar-list{
-    display: flex;
-    width: 25%;
-  }
-  .navbar-items{
+const StyledLink = styled(Link)`
+    min-width: 130px;
     font-weight: 600;
-  }
-  
-  `;
+    
+ @media screen and (max-width: 790px) {
+  min-width: 80px;
+}
+`;
+
+const StyledText = styled.div`
+    min-width: 130px;
+    display: flex;
+    justify-content: end;
+    box-sizing: border-box;
+    
+    color:gray;
+    font-size: small;
+    font-weight: 300;
+// 모바일
+ @media screen and (max-width: 790px) {
+  min-width: 80px;
+}
+`;
+
 
 export default NavBar;
