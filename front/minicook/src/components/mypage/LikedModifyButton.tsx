@@ -44,7 +44,9 @@ const LikedModifyButton: React.FC<LikedModifyButtonProps> = ({ onModify, onRemov
 const LikedModifyButtonWrapper = styled.div`
 display: flex;
 justify-content: end;
-width: 20%;
+width: 100%;
+max-width: 170px;
+height: 40px;
 `;
 
 const StyledButton = styled.div`
