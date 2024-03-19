@@ -24,8 +24,8 @@ const Header: React.FC<HeaderProps> = ({ user, onLogout }) => {
   }, []);
 
   return (
-    <>
-      <HeaderWrapper>
+    <HeaderWrapper>
+      <Section>
         <MainLogo to='/'>
           <img width={115} height={115} src={mainLogo} alt={`미니쿡아이콘`}></img>
         </MainLogo>
@@ -42,35 +42,42 @@ const Header: React.FC<HeaderProps> = ({ user, onLogout }) => {
             </>
           )}
         </div>
-      </HeaderWrapper>
-      <NavBar />
-    </>
+      </Section>
+    </HeaderWrapper>
   );
 };
 
 const HeaderWrapper = styled.div`
-width:100%;
-height:5rem;
+display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+background-color: #455631;
+`;
+
+const Section = styled.div`
+height:85px;
+width: 100%;
+max-width: 1200px;
 display: flex;
 justify-content: space-between;
 align-items: center;
-text-align: center;
-padding: 0 20%;
-background-color: #455631;
+padding: 0px 20px;
 
 .header-button{
+  min-width: 200px;
   display: flex;
   justify-content: end;
   align-items: center;
   cursor: pointer;
   }
-  
 `;
 const MainLogo = styled(Link)`
   display: flex;
   align-items: center;
   cursor: pointer;
 `;
+
 const StyledButton = styled.button`
     display: flex;
       align-items: center;
@@ -90,6 +97,6 @@ const SytledLink = styled(Link)`
       border-radius: 0px;
       font-size:small;
       color: white;
-      `;
-//
+`;
+
 export default Header;
