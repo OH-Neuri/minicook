@@ -34,9 +34,12 @@ const CategoryWrapper = styled(NavLink)<{ $isSelect: boolean; $isOpen: boolean }
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 7.4rem;
-  height: 3rem;
+  width: 125px;
+  height: 50px;
   
+  @media screen and (max-width: 790px) {
+    width: 145px;
+  }
   ${(props) =>
     props.$isSelect
       ? css`

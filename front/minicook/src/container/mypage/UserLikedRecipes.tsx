@@ -15,7 +15,7 @@ import {
 } from "../../store/reducers/userLiked";
 import Recipe from "../../data/type/recipe";
 
-const UserLikedRecipesContainer = () => {
+const UserLikedRecipes = () => {
   const dispatch = useDispatch<AppDispatch>();
   //const recipes: RecipeType[] = useSelector((state: RootState) => state.userLiked.recipe);
   const user = useSelector((state: RootState) => state.user);
@@ -63,47 +63,51 @@ const UserLikedRecipesContainer = () => {
   }, []);
 
   return (
-    <UserLikedRecipesContainerWrapper>
-      <div className='navigation-wrapper'>
-        <div className='navigation-text'>좋아요한 레시피</div>
+    <UserLikedRecipesWrapper>
+      <div className='navigation-text'>좋아요한 레시피</div>
+      <div className='navigation-item'>
         <LikedSortTab onSwitch={handleTab} onSort={handleSortTab} />
         <LikedModifyButton onModify={handleModifyButton} onRemove={handleDeleteButton} />
       </div>
       <div className='view-wrapper'>
         <RecipeViewBox filteredIngredients={tempRecipes} />
       </div>
-    </UserLikedRecipesContainerWrapper>
+    </UserLikedRecipesWrapper>
   );
 };
 
-const UserLikedRecipesContainerWrapper = styled.div`
+const UserLikedRecipesWrapper = styled.div`
 width: 100%;
 height: 80%;
+display: flex;
+flex-direction: column;
+align-items: center;
+        @media screen and (max-width: 625px) {
+          margin-top: 25px;
+    }
 
-.navigation-wrapper{
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 2rem;
-    .navigation-text{
+  .navigation-text{
     font-size: x-large;
     font-weight: 600;
-
+    width: 100%;
+    margin-top: 20px;
+    max-width: 1000px;
+    padding: 0 20px;
   }
-  .navigation-content{
+  .navigation-item{
     justify-content: space-between;
     display: flex;
     width: 100%;
-    height: 100%;
-  }
+    max-width: 1000px;
+    padding: 0 20px;
 }
-.view-wrapper
-{
-  padding-top: 1rem;
+
+.view-wrapper{
+  max-width: 1050px;
+  padding-top: 20px;
   height: 85%;
   width: 100%;
   position: relative;
-  /*overflow: auto;*/
   .view-shadow{
     width: inherit;
     height: 100%;
@@ -115,4 +119,4 @@ height: 80%;
 }
 `;
 
-export default UserLikedRecipesContainer;
+export default UserLikedRecipes;

@@ -29,8 +29,9 @@ const LikedSortTab: React.FC<LikedSortTabProps> = ({ onSwitch, onSort }) => {
 };
 const LikedSortTabWrapper = styled.div`
 display: flex;
-width: 30%;
-height: 50%;
+width: 100%;
+max-width: 250px;
+height: 40px;
 `;
 
 const StyledTab = styled.div<{ $isSelected: boolean }>`

@@ -1,14 +1,22 @@
 import React from "react";
-import MyPageTemplate from "../../components/mypage/MyPageTemplate";
-import UserInfoContainer from "../../container/mypage/UserInfoContainer";
-import UserLikedRecipesContainer from "../../container/mypage/UserLikedRecipesContainer";
+import styled from "styled-components";
+import UserInfo from "../../container/mypage/UserInfo";
+import UserLikedRecipes from "../../container/mypage/UserLikedRecipes";
 const MyPage = () => {
   return (
-    <MyPageTemplate>
-      <UserInfoContainer />
-      <UserLikedRecipesContainer />
-    </MyPageTemplate>
+    <MyPageWrapper>
+      <UserInfo />
+      <UserLikedRecipes />
+    </MyPageWrapper>
   );
 };
-
+const MyPageWrapper = styled.div`
+width: 100%;
+height: 100vh;
+padding: 15px;
+background-color:#F4F1EB ;
+display: flex;
+flex-direction: column;
+align-items: center;
+`;
 export default MyPage;

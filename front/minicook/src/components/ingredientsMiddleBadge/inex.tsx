@@ -19,23 +19,14 @@ const IngredientsMiddleBadge: React.FC<RecipeSelectTagProps> = ({
   selectedIngredients,
   onToggle,
 }) => {
-  //const [tagContainerWidth, setTagContainerWidth] = useState<number>(0);
-  //const [leftButton, setLeftButton] = useState<number>(0);
-  //const [rightButton, setRightButton] = useState<number>(0);
   const tagContainerRef = useRef<HTMLDivElement | null>(null);
 
   const handleButton = (ingredientName: string) => {
     ingredientName && onToggle(ingredientName);
   };
 
-  //useEffect(() => {
-  //  if (tagContainerRef.current)
-  //    setTagContainerWidth(tagContainerRef.current.offsetWidth);
-  //}, [selectedIngredients]);
-
   return (
     <RecipeSelectTagWrapper>
-      {/*{<div className='tag-button'></div>}*/}
       <div className='tag-container' ref={tagContainerRef}>
         {selectedIngredients.map((ingredient, i) => (
           <div key={i} className='tag' onClick={() => handleButton(ingredient)}>
@@ -44,22 +35,28 @@ const IngredientsMiddleBadge: React.FC<RecipeSelectTagProps> = ({
           </div>
         ))}
       </div>
-      {/*{<div className='tag-button'></div>}*/}
     </RecipeSelectTagWrapper>
   );
 };
 const RecipeSelectTagWrapper = styled.div`
-display: flex;
 width: 100%;
+height: 50px;
+max-width: 850px;
+
+display: flex;
 padding: 0 3%;
-margin-top: 1.3rem;
-height: 3.5rem;
 overflow-x: hidden;
+
+@media screen and (max-width: 790px) {
+max-width: 480px;
+margin-top: 15px;
+}
 
   .tag-container{
     display:flex;
     gap: 1rem;
     width: fit-content;
+
     .tag {
       width: fit-content;
       min-width: max-content;

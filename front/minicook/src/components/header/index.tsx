@@ -1,66 +1,94 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import NavBar from "../navBar";
-import mainLogo from "../../data/assets/minicook_logo.svg";
-import { useNavigate } from "react-router-dom";
+import mainLogo from "../header/assets/minicook_logo.svg";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store/store";
+import { setResetRemoveIndex } from "../../store/reducers/userLiked";
 
-const Header = () => {
-  const [user, setUser] = useState(true);
-  const navigate = useNavigate();
+interface HeaderProps {
+  user: boolean | null;
+  onLogout: () => void;
+}
 
-  const changePage = (e: React.MouseEvent<HTMLDivElement>) => {
-    const page = e.currentTarget.dataset.id;
-    navigate(`/${page}`);
+const Header: React.FC<HeaderProps> = ({ user, onLogout }) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const handleLogout = () => {
+    onLogout();
+    dispatch(setResetRemoveIndex());
   };
 
+  useEffect(() => {
+    console.log("asdasd");
+  }, []);
+
   return (
-    <>
-      <HeaderWrapper>
-        <div className='header-logo cursor-pointer' data-id={""} onClick={changePage}>
+    <HeaderWrapper>
+      <Section>
+        <MainLogo to='/'>
           <img width={115} height={115} src={mainLogo} alt={`미니쿡아이콘`}></img>
-        </div>
-        <div className='header-button cursor-pointer'>
+        </MainLogo>
+        <div className='header-button'>
           {user ? (
             <>
-              <div data-id={"login"} onClick={(e) => changePage(e)}>
-                로그인
-              </div>
-              <div data-id={"signup"} onClick={(e) => changePage(e)}>
-                회원가입
-              </div>
+              <SytledLink to='/myPage'>마이페이지</SytledLink>
+              <StyledButton onClick={handleLogout}>로그아웃</StyledButton>
             </>
           ) : (
-            <></>
+            <>
+              <SytledLink to='/login'>로그인</SytledLink>
+              <SytledLink to='/register'>회원가입</SytledLink>
+            </>
           )}
         </div>
-      </HeaderWrapper>
-      <NavBar></NavBar>
-    </>
+      </Section>
+    </HeaderWrapper>
   );
 };
-// 일단 JSX부분에 html 처럼 작성하고, 그 구분되는 클래스는 Wrapper 컴포넌트 안에 작성한다.
+
 const HeaderWrapper = styled.div`
-width:100%;
-height:5rem;
+display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+background-color: #455631;
+`;
+
+const Section = styled.div`
+height:85px;
+width: 100%;
+max-width: 1200px;
 display: flex;
 justify-content: space-between;
 align-items: center;
-text-align: center;
-padding: 0 20%;
-background-color: #455631;
-
-
- .header-logo{
-  display: flex;
-  align-items: center;
-}
+padding: 0px 20px;
 
 .header-button{
+  min-width: 200px;
   display: flex;
   justify-content: end;
   align-items: center;
-  
-    > div {
+  cursor: pointer;
+  }
+`;
+const MainLogo = styled(Link)`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+`;
+
+const StyledButton = styled.button`
+    display: flex;
+      align-items: center;
+      height: 1.75rem;
+      padding: 0 1.4rem;
+      margin-left: 1.1rem;
+      border-radius: 0px;
+      font-size:small;
+      color: white;
+`;
+const SytledLink = styled(Link)`
       display: flex;
       align-items: center;
       height: 1.75rem;
@@ -68,12 +96,7 @@ background-color: #455631;
       margin-left: 1.1rem;
       border-radius: 0px;
       font-size:small;
-      /*border: 1px solid #d3bea7;*/
-      /*background-color: #dcae79;*/
       color: white;
-    }
-  }
-
 `;
-//
+
 export default Header;
