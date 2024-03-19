@@ -27,11 +27,18 @@ const RecipeViewBox: React.FC<RecipeSelectViewProps> = ({ filteredIngredients })
 
 const RecipeViewBoxWrapper = styled.div`
 width: 100%;
+max-width: 1080px;
 height: 100%;
-flex-wrap: wrap;
+
 display: flex;
-gap: 1.2rem;
+flex-wrap: wrap;
+justify-content: center;
+gap: 20px;
 overflow-y: scroll;
-padding: 0 0.5rem;
+padding: 0 10px;
+    @media screen and (max-width: 790px) {
+    max-width: 600px;
+    height: 100%;
+    }
 `;
 export default React.memo(RecipeViewBox);

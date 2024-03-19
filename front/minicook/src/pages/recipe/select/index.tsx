@@ -111,16 +111,14 @@ const RecipeSelect = () => {
 
   return (
     <RecipeSelectWrapper>
-      <div className='select-header'>
-        <CategorySelectHeader
-          ingredientInfo={IngredientInfo}
-          onToggle={handleIngredientToggle}
-        />
-        <IngredientsMiddleBadge
-          selectedIngredients={selectedIngredients}
-          onToggle={handleIngredientToggle}
-        />
-      </div>
+      <CategorySelectHeader
+        ingredientInfo={IngredientInfo}
+        onToggle={handleIngredientToggle}
+      />
+      <IngredientsMiddleBadge
+        selectedIngredients={selectedIngredients}
+        onToggle={handleIngredientToggle}
+      />
       <div className='select-view'>
         {<RecipeViewBox filteredIngredients={recommendedRecipes} />}
       </div>
@@ -129,22 +127,18 @@ const RecipeSelect = () => {
 };
 
 const RecipeSelectWrapper = styled.div`
-background-color: #F4F1EB;
+width:100%;
+height: 900px;
 display: flex;
 flex-direction: column;
-gap:1rem;
-width:100%;
-height: 90vh;
-padding: 3.5rem 23% 6rem 23%;
-.select-header{
-  width: 100%;
-  height: 22%;
-  padding: 0 13%;
-}
+align-items: center;
+background-color: #F4F1EB;
+padding: 30px 0px;
   .select-view{
-  width: 100%;
-  height: 78%;
+  height: 65%;
+  margin-top: 10px;
 }
+
 `;
 
 export default RecipeSelect;

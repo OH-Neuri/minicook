@@ -37,18 +37,23 @@ export const IngredientsModal: React.FC<ModalProps> = ({ ingredientInfo, onToggl
 
 const IngredientsModalWrapper = styled.div`
     z-index: 10;
-    top:3rem;
+    top:72px;
     background-color: #ffffff;
     border: 1px solid #acb7a7;
     width: 100%;
-    height: 13rem;
+    height: 200px;
     position: absolute;
     overflow-y: scroll;
+    @media screen and (max-width: 790px) {
+    top: 100px;
+    width: 450px;
+  }
+
     .button-wrapper{
         margin-top: 19px;
-        margin-left: 1.5rem;
+        margin-left: 43px;
         display: flex;
         flex-wrap: wrap;
-        gap:10px;
+        gap:11px;
     }
 `;

@@ -51,16 +51,17 @@ const CategorySelectHeader: React.FC<SelectButtonProps> = ({
         setSelectCategory(-1);
       }
     };
+
     document.addEventListener("click", handleModal);
     return () => document.removeEventListener("click", handleModal);
   }, [isOpenModal]);
 
   return (
     <RecipeSelectHeaderWrapper ref={modalRef}>
-      <div className='flex justify-between w-full'>
+      <div className='category-wrapper'>
         {ingredientsMenu.map((menu) => (
           <div
-            className='category-wrapper'
+            className='category-box'
             key={menu.id}
             onClick={() => {
               handleOpenModal();
@@ -84,8 +85,27 @@ const CategorySelectHeader: React.FC<SelectButtonProps> = ({
 
 const RecipeSelectHeaderWrapper = styled.div`
 width: 100%;
-height: 3rem;
-flex-direction: column;
+max-width: 800px;
+height: 100px;
+display: flex;
+justify-content: center;
+align-items: center;
 position: relative;
+
+  .category-wrapper{
+    width: 100%;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3px;
+
+    @media screen and (max-width: 790px) {
+    max-width: 450px;
+    height: 100px;
+    }
+
+  }
+
 `;
 export default CategorySelectHeader;
