@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import NavBar from "../../navBar";
+import NavBar from "../navBar";
 import mainLogo from "../header/assets/minicook_logo.svg";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../store/store";
-import { setResetRemoveIndex } from "../../../store/reducers/userLiked";
+import { AppDispatch } from "../../store/store";
+import { setResetRemoveIndex } from "../../store/reducers/userLiked";
 
 interface HeaderProps {
   user: boolean | null;
