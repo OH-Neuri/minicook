@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import SearchBarList from "./searchBarList";
-import Recipe from "../../data/type/recipe";
+import SearchBarList from "../searchBarList";
+import RecipeType from "../../../type/recipe";
 
 interface SearchBarInfoProps {
   input: string;
-  recipe: Recipe[];
+  recipe: RecipeType[];
 }
 
 const SearchBarInfo: React.FC<SearchBarInfoProps> = ({ input, recipe }) => {
@@ -18,21 +18,27 @@ const SearchBarInfo: React.FC<SearchBarInfoProps> = ({ input, recipe }) => {
 };
 
 const SearchBarInfoWrapper = styled.div`
-    background-color: #ffffff;
-    height: 40vh;
+    height: 330px;
+    width: 700px;
     margin-left: auto;
     margin-right: auto;
-    width: 100%;
-    top:2.5rem;
-    left: 0rem;
+    padding: 10px 0;
+    position:absolute;
     z-index: 10;
-    opacity: 0;
-    animation: fadeIn 0.2s ease-out forwards;
-    border-bottom: 2px solid #cdc7be;
+    top:50px;
+    
     display: flex;
     justify-content: space-evenly;
-    padding: 0.5rem 0;
-    position:absolute;
+    
+    background-color: #ffffff;
+    animation: fadeIn 0.2s ease-out forwards;
+    border-bottom: 2px solid #cdc7be;
+
+    @media screen and (max-width: 790px) {
+      flex-wrap: wrap;
+    max-width: 450px;
+    height: 600px;
+    }
 
     @keyframes fadeIn {
     from {

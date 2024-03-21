@@ -50,16 +50,21 @@ const SearchBarList: React.FC<SearchBarListProps> = ({
   );
 };
 const SearchBarListWrapper = styled.div`
-    padding: 0.7rem 0.7rem;
+    padding: 10px;
     overflow-y: scroll;
     overflow-x: hidden; 
     background-color: #f4efeb;
     border-radius: 15px;
-    width: 45%;
+    width: 100%;
+    max-width: 320px;
     display: flex;
     flex-direction: column;
     align-items: center;
     scroll-behavior: auto;
+    @media screen and (max-width: 790px) {
+    max-width: 400px;
+    height: 280px;
+    }
     &::-webkit-scrollbar-thumb{
         background: none
       }
