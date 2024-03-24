@@ -23,12 +23,12 @@ const SearchBarInfoWrapper = styled.div`
     margin-left: auto;
     margin-right: auto;
     padding: 10px 0;
-    position:absolute;
-    z-index: 10;
-    top:50px;
-    
     display: flex;
     justify-content: space-evenly;
+
+    position:absolute;
+    top:50px;
+    z-index: 10;
     
     background-color: #ffffff;
     animation: fadeIn 0.2s ease-out forwards;
@@ -36,8 +36,8 @@ const SearchBarInfoWrapper = styled.div`
 
     @media screen and (max-width: 790px) {
       flex-wrap: wrap;
-    max-width: 450px;
-    height: 600px;
+      max-width: 450px;
+      height: 600px;
     }
 
     @keyframes fadeIn {
