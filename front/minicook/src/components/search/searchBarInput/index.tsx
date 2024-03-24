@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { IoSearchOutline } from "@react-icons/all-files/io5/IoSearchOutline";
 
@@ -11,13 +11,13 @@ const SearchBarInput: React.FC<SearchBarInputProps> = ({
   onSearchClick,
   onChangeInput,
 }) => {
-  const handleSearchBar = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleSearchBar = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     onSearchClick();
-  };
+  }, []);
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     onChangeInput(e.target.value);
-  };
+  }, []);
 
   return (
     <SearchBarWrapper className='cursor-pointer' onClick={handleSearchBar}>
@@ -82,4 +82,4 @@ const SearchBarWrapper = styled.div`
  }
 `;
 
-export default SearchBarInput;
+export default React.memo(SearchBarInput);
