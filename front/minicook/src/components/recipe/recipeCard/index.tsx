@@ -104,6 +104,17 @@ export const RecipeCard: React.FC<ReacipeCardProps> = ({ recipe, detail, modify 
 };
 
 const ReacipeCardWrapper = styled.div<{ $isDetail: boolean }>`
+width: 20rem;
+height: 17.5rem;
+border-radius: 5px;
+display: flex;
+flex-direction: column;
+overflow: hidden;
+box-sizing: content-box;
+margin-bottom: 0.6rem;
+cursor: pointer;
+position: relative;
+
 
   ${(props) =>
     !props.$isDetail &&
