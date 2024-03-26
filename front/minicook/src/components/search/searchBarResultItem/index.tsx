@@ -10,7 +10,12 @@ interface SearchBarItemProps {
   ingredients: string[];
 }
 
-const SearchBarItem: React.FC<SearchBarItemProps> = ({ id, name, like, ingredients }) => {
+const SearchBarResultItem: React.FC<SearchBarItemProps> = ({
+  id,
+  name,
+  like,
+  ingredients,
+}) => {
   const navigate = useNavigate();
   const navigateToPage = () => {
     navigate(`/recipe?id=${id}&page=1`);
@@ -54,4 +59,4 @@ const SearchBarItemWrapper = styled.div`
     }
 `;
 
-export default SearchBarItem;
+export default SearchBarResultItem;

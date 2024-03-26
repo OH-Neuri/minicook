@@ -2,9 +2,9 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import recipe from "../../data/recipe";
-import SearchBarInfo from "../search/searchBarInfo";
 import useDebounce from "../../hooks/useDebounce";
-import SearchBarInput from "../search/searchBarInput";
+import SearchBarForm from "../search/searchBarForm";
+import SearchBarResultBox from "../search/searchBarResultBox";
 
 const NavBar: React.FC = () => {
   const [navBarOpen, setNavBarOpen] = useState<boolean>(false); // 검색 바의 열림/닫힘 상태를 관리하는 상태 변수
@@ -43,11 +43,11 @@ const NavBar: React.FC = () => {
       <Section>
         <StyledLink to='/recipe/select'>레시피 선택</StyledLink>
         <div className='navbar-search-wrapper' ref={navbarInfoRef}>
-          <SearchBarInput
+          <SearchBarForm
             onChangeInput={handleInput}
             onSearchClick={handleOpenSearchBar}
           />
-          {navBarOpen && <SearchBarInfo input={input} recipe={recipe} />}
+          {navBarOpen && <SearchBarResultBox input={input} recipe={recipe} />}
         </div>
         <StyledText>#대파#삼겹살#김밥</StyledText>
       </Section>

@@ -1,13 +1,13 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import { IoSearchOutline } from "@react-icons/all-files/io5/IoSearchOutline";
 
-interface SearchBarInputProps {
+interface SearchBarFormProps {
   onSearchClick: () => void;
   onChangeInput: (newInput: string) => void;
 }
 
-const SearchBarInput: React.FC<SearchBarInputProps> = ({
+const SearchBarForm: React.FC<SearchBarFormProps> = ({
   onSearchClick,
   onChangeInput,
 }) => {
@@ -51,7 +51,6 @@ const SearchBarWrapper = styled.div`
   width: 260px;
 }
 
-
  .search-icon{
   width: 8%;
  }
@@ -82,4 +81,4 @@ const SearchBarWrapper = styled.div`
  }
 `;
 
-export default React.memo(SearchBarInput);
+export default React.memo(SearchBarForm);

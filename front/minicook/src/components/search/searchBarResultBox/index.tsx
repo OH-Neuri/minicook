@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import SearchBarList from "../searchBarList";
+import SearchBarList from "../searchBarResultList";
 import RecipeType from "../../../type/recipe";
 
 interface SearchBarInfoProps {
@@ -8,7 +8,7 @@ interface SearchBarInfoProps {
   recipe: RecipeType[];
 }
 
-const SearchBarInfo: React.FC<SearchBarInfoProps> = ({ input, recipe }) => {
+const SearchBarResultBox: React.FC<SearchBarInfoProps> = ({ input, recipe }) => {
   return (
     <SearchBarInfoWrapper>
       <SearchBarList title='재료명' input={input} recipe={recipe} />
@@ -52,4 +52,4 @@ const SearchBarInfoWrapper = styled.div`
   }
   `;
 
-export default SearchBarInfo;
+export default SearchBarResultBox;
