@@ -1,1 +1,35 @@
+server:
+  servlet:
+    context-path: /api
+    encoding:
+      charset: UTF-8
+      force: true
 
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/minicook
+    username: minicook
+    password: minicook1001
+    driver-class-name:  com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: Asia/Seoul
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+
+auth:
+  jwt:
+    secret: lmlzsdf8113rknzlqu21rikzdsm127dsdlfjoiasjdof137412jozi1824kmfsdsdojo3174klzmflfjwerzlsdjfi137dz
+    iss: minicook.com
+    access_exp: 3600000
+    refresh_exp: 1296000000
