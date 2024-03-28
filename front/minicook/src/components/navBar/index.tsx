@@ -65,13 +65,13 @@ const NavBarWrapper = styled.div`
 `;
 
 const Section = styled.div`
-height:60px;
-width: 100%;
-max-width: 1200px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 0px 20px;
+  height:60px;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
 
   .navbar-search-wrapper{
     width: 100%;
@@ -83,23 +83,23 @@ padding: 0px 20px;
 `;
 
 const StyledLink = styled(Link)`
-    min-width: 130px;
-    font-weight: 600;
-    
+  min-width: 130px;
+  font-weight: 600;
+  
  @media screen and (max-width: 790px) {
   min-width: 80px;
 }
 `;
 
 const StyledText = styled.div`
-    min-width: 130px;
-    display: flex;
-    justify-content: end;
-    box-sizing: border-box;
-    
-    color:gray;
-    font-size: small;
-    font-weight: 300;
+  min-width: 130px;
+  display: flex;
+  justify-content: end;
+  box-sizing: border-box;
+  
+  color:gray;
+  font-size: small;
+  font-weight: 300;
 // 모바일
  @media screen and (max-width: 790px) {
   min-width: 80px;

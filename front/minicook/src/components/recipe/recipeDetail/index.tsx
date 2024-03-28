@@ -31,12 +31,10 @@ const RecipeDetail: React.FC<ReacipeDetailProps> = ({ recipe, page, onChangePage
   };
 
   return (
-    <RecipeDetailBlock>
-      <div className='text-base h-8  flex justify-center items-center text-[#ffffff]  rounded-full font-semibold bg-[#6a4e19] w-36'>
-        만드는 방법
-      </div>
+    <RecipeDetailWrapper>
+      <Header>만드는 방법</Header>
       <div className='detail-content'>
-        <button className='detail-button' aria-label='Previous Step'>
+        <StepButton aria-label='Previous Step'>
           {page && pageIndex !== 1 && (
             <FaChevronLeft
               className='cursor-pointer'
@@ -44,23 +42,17 @@ const RecipeDetail: React.FC<ReacipeDetailProps> = ({ recipe, page, onChangePage
               onClick={handleLeftButton}
             />
           )}
-        </button>
+        </StepButton>
         {page && (
-          <div className='detail-step'>
-            <img
-              className='detail-image'
-              src={image[pageIndex - 1]}
-              width={100}
-              height={100}
-              alt='recipe'
-            />
+          <DetailStepWrapper>
+            <StepImage src={image[pageIndex - 1]} width={100} height={100} alt='recipe' />
             <div className='detail-step-text'>
               {`Step ${pageIndex}`}
               <div className='detail-text'>{content[pageIndex - 1]}</div>
             </div>
-          </div>
+          </DetailStepWrapper>
         )}
-        <button className='detail-button' aria-label='Next Step'>
+        <StepButton aria-label='Next Step'>
           {page && pageIndex !== content.length && (
             <FaChevronRight
               className='cursor-pointer'
@@ -68,61 +60,96 @@ const RecipeDetail: React.FC<ReacipeDetailProps> = ({ recipe, page, onChangePage
               onClick={handleRightButton}
             />
           )}
-        </button>
+        </StepButton>
       </div>
-      {/*<Pagination count={ingredients.length} page={page} onChangePage={onChangePage} />*/}
-    </RecipeDetailBlock>
+    </RecipeDetailWrapper>
   );
 };
-const RecipeDetailBlock = styled.div`
-width:68%;
+
+const Header = styled.div`
+width: 144px;
+height: 32px;
+display: flex;
+margin-bottom: 10px;
+justify-content: center;
+align-items: center;
+
+color:white;
+--tw-bg-opacity: 1;
+background-color: rgb(106 78 25 / var(--tw-bg-opacity));
+font-weight: 600;
+font-size: 1rem/* 16px */;
+line-height: 24px;
+border-radius: 9999px;
+
+`;
+const RecipeDetailWrapper = styled.div`
+width:72%;
+max-width: 800px;
+min-width: 500px; 
+
 height: 100%;
-padding: 0 1rem;
+max-height:600px;
+min-height: 550px;
+padding: 0 10px;
 display: flex;
 flex-direction: column;
 align-items: center;
-justify-content: start;
-.detail-button{
-    width: 5%;
-    height: 5%;
-}
+
+ @media screen and (max-width: 860px) {
+  margin: 20px 0px;
+  min-height: 390px;
+  }
+
 .detail-content{
-    display: flex;
-    width: 100%;
-    height: 80%;
-    justify-content: space-between;
-    align-items: center;
-    .detail-step{
-        height: 95%;
-        width: 90%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        pointer-events: none; 
-        .detail-image{
-            width: 90%;
-            height: 80%;
-            object-fit: cover;
-            background-size: cover;
-            pointer-events: none;
-            border-radius: 10px;
-        }
-
-        .detail-step-text{
-            width: 85%;
-            font-size:x-large;
-            font-weight: 600;
-            color:#c10808;
-        
-        }
-
-        .detail-text{
-            margin-top: 0.5rem;
-            font-size:large;
-        }
-    }
+  width: 90%;
+  height: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 `;
 
+const DetailStepWrapper = styled.div`
+  height: 95%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+
+    .detail-step-text{
+      width: 90%;
+      height: 100px;
+      font-size:x-large;
+      font-weight: 600;
+      color:#c10808;
+    
+    }
+
+    .detail-text{
+      margin-top: 0.5rem;
+      font-size:large;
+    }
+`;
+
+const StepImage = styled.img`
+  width: 90%;
+  height: 90%;
+  max-height: 380px;
+  margin: 0 20px;
+  object-fit: cover;
+  background-size: cover;
+  pointer-events: none;
+  border-radius: 10px;
+`;
+
+const StepButton = styled.button`
+width:30px;
+height:100%;
+display: flex;
+justify-content: center;
+align-items: center;
+`;
 export default RecipeDetail;

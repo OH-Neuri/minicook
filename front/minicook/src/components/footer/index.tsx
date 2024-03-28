@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import logo from "../../data/assets/minicook_logo.svg";
-import info from "./data/data";
+import { footerInfo } from "./data/data";
 
 const Footer = () => {
   const openPage = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -14,9 +14,13 @@ const Footer = () => {
       <div className='footer__logo'>
         <img src={logo} width={80} height={80} alt='미니쿡로고'></img>
       </div>
-      <div className='footer__userinfo cursor-pointer'>
-        {info.map(({ icon, link }) => (
-          <div className='footer__useritem' data-id={link} onClick={(e) => openPage(e)}>
+      <div className='footer__userinfo'>
+        {footerInfo.map(({ icon, link }, i) => (
+          <div
+            className='footer__useritem'
+            key={i}
+            data-id={link}
+            onClick={(e) => openPage(e)}>
             {icon}
           </div>
         ))}
@@ -32,44 +36,46 @@ const Footer = () => {
 };
 
 const FooterWrapper = styled.div`
+  width: 100%;
+  height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 17rem;
-  width: 100%;
   line-height: 5rem;
+
   background-color: #e4e1dc;
 
   .footer__userinfo{
     display: flex;
-    width: 8rem;
+    width: 130px;
     padding: 15px 0 5px 0;
+    cursor: pointer;
   }
   
   .footer__useritem{
-    height: 30px;
     display: flex;
+    width: 130px;
+    height: 30px;
     justify-content: space-between;
-    width: 8rem;
 
     > svg { 
+      padding: 5px 5px;
       margin-right: 10px;
+
       font-size:37px;
       fill: white;
       background-color: #aa9884;
-      padding: 5px 5px;
       border-radius:20px;
     }
   }
   .footer__line{
-    margin-top: 1.5rem;
     height:2px;
     width: 70%;
+    margin-top: 20px;
     background-color: #d3bea7;
   }
   .footer__text{
-    height: 5rem;
     color:#9b7d5d;
   }
 `;
