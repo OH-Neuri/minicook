@@ -115,6 +115,7 @@ margin-bottom: 0.6rem;
 cursor: pointer;
 position: relative;
 
+
   ${(props) =>
     !props.$isDetail &&
     css`
@@ -126,6 +127,7 @@ position: relative;
         } 
       } 
     `}
+    
   .card-select{
     width: 100%;
     height: 100%;

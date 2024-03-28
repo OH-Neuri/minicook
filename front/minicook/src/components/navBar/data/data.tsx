@@ -1,4 +1,3 @@
-import React from "react";
 import NavBarTab from "../type/type";
 
 const tab: NavBarTab[] = [

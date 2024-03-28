@@ -1,9 +1,9 @@
+import MainCarousel from "../../components/main/mainCarousel";
+import MainHeader from "../../components/main/mainHeader";
+import MainTopRecipe from "../../components/main/mainTopRecipe";
 import recipe from "../../data/recipe";
 import mainHeaderImage from "./assets/mainPage_frying_pan.svg";
 
-import MainHeader from "../../components/main/MainHeader";
-import MainTopRecipe from "../../components/main/MainTopRecipe";
-import MainCarousel from "../../components/main/MainCarousel";
 import styled from "styled-components";
 
 const MainPage = () => {

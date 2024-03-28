@@ -2,11 +2,12 @@ import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { produce } from "immer";
 import ingredientsMenu, { IngredientsMenuType } from "./data/ingredients";
-import CategorySelectHeader from "../../../components/categorySelectHeader";
-import IngredientsMiddleBadge from "../../../components/ingredientsMiddleBadge/inex";
+
 import RecipeViewBox from "../../../components/recipe/recipeViewBox";
 import Recipe from "../../../data/type/recipe";
 import recipe from "../../../data/recipe";
+import CategorySelectHeader from "../../../components/recipeSelct/categorySelectHeader";
+import IngredientsMiddleBadge from "../../../components/recipeSelct/ingredientsMiddleBadge/inex";
 
 /**
  * RecipeSelect 컴포넌트

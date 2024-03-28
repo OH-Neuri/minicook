@@ -38,26 +38,31 @@ const RecipeDetailPage = () => {
   }, [searchParams]);
 
   return (
-    <RecipeDetailPageBlock>
+    <RecipeDetailPageWrapper>
       <div className='detail-info'>
         <RecipeCard recipe={currentRecipe} detail={true} />
         <RecipeLikeButton recipe={currentRecipe} />
         <RecipeIngredients ingredients={currentRecipe.ingredients} />
       </div>
       <RecipeDetail recipe={currentRecipe} page={page} onChangePage={handlePage} />
-    </RecipeDetailPageBlock>
+    </RecipeDetailPageWrapper>
   );
 };
-const RecipeDetailPageBlock = styled.div`
-width: 100%;
-height: 80vh;
-padding: 3.5rem 20% 6rem 20%;
-background-color: #F4F1EB;
-display: flex;
-justify-content: space-between;
-.detail-info{
-  width: 28%;
-}
+const RecipeDetailPageWrapper = styled.div`
+  width: 100%;
+  padding: 60px 20px 40px 20px;
+  background-color: #F4F1EB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  .detail-info{
+    flex-direction: column;
+    justify-content: center;
+  }
+ @media screen and (max-width: 860px) {
+  flex-wrap: wrap;
+  }
 `;
 
 export default RecipeDetailPage;

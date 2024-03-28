@@ -35,10 +35,12 @@ margin-top: 2rem;
 padding: 0.5rem 0.8rem;
 
 .header{
+    width: 200px;
     font-size: x-large;
     font-weight: 700;
 }
 .content{
+    width: 300px;
     margin-top: 1rem;
     font-weight: 600;
     font-size: large;

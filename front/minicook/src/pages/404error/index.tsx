@@ -27,25 +27,25 @@ const ErrorPage = () => {
 export default ErrorPage;
 
 const ErrorPageWrapper = styled.div`
-width: 100%;
-height: 100vh;
-background-color:#F4F1EB ;
-position: absolute;
-top: 0;
-left:0;
-bottom: 0;
-right: 0;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left:0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color:#F4F1EB;
 `;
 
 const Text = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   h2 {
     font-weight: 700;
     font-size: 30px;
@@ -56,7 +56,6 @@ align-items: center;
     font-weight: 500;
     font-size: 16px;
     color: #3d3d3d;
-    letter-spacing: 0.09em;
   }
 `;
 
@@ -74,7 +73,7 @@ const StyledLink = styled(Link)`
   width: 20%;
   height: 80px;
   border-radius: 10px;
-  background-color: #2f6100;
+  background-color: ${(props) => props.theme.colors.green1};
 
   text-align: center;
   line-height: 80px;

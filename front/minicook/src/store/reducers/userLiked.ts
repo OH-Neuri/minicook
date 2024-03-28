@@ -1,6 +1,7 @@
-import { authClient } from "../../lib/api";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { UserLikedType } from "../../type/userLiked";
+import { authClient } from "../../api";
+import { UserLikedType } from "../../type";
+
 
 export const getLikedRecipesDate = createAsyncThunk(
   `userLiked/getUserLikedRecipe`,
