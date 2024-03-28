@@ -7,13 +7,32 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./style";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
+import { tempSetUser } from "./store/reducers/user";
+
+function loadUser() {
+  try {
+    // 로컬스토리지에 유저 정보가 있으면
+    const user = localStorage.getItem("user");
+    if (!user) return;
+    // user 다시 dispatch 하기
+    store.dispatch(tempSetUser(JSON.parse(user)));
+  } catch (e) {
+    console.log("localStroage is not working");
+  }
+}
+
+loadUser();
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
   <BrowserRouter>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </Provider>
   </BrowserRouter>
 );
 
