@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import SearchBarList from "../searchBarResultList";
-import RecipeType from "../../../type/recipe";
+import { RecipeType } from "../../../type";
+
 
 interface SearchBarInfoProps {
   input: string;

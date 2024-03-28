@@ -1,12 +1,12 @@
 import React from "react";
 import SearchBarItem from "../searchBarResultItem";
-import Recipe from "../../../data/type/recipe";
 import styled from "styled-components";
+import { RecipeType } from "../../../type";
 
 interface SearchBarListProps {
   input: string;
   title: string;
-  recipe: Recipe[];
+  recipe: RecipeType[];
   children?: React.ReactNode;
 }
 

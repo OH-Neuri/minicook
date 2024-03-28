@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import UserInfo from "../../container/mypage/UserInfo";
-import UserLikedRecipes from "../../container/mypage/UserLikedRecipes";
+import UserLikedRecipesContainer from "../../containers/mypage/userLikedRecipesContainer";
+import UserInfoContainer from "../../containers/mypage/userInfoContainer";
+
 const MyPage = () => {
   return (
     <MyPageWrapper>
-      <UserInfo />
-      <UserLikedRecipes />
+      <UserInfoContainer />
+      <UserLikedRecipesContainer />
     </MyPageWrapper>
   );
 };

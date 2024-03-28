@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Recipe from "../../../data/type/recipe";
 import { FaChevronLeft } from "@react-icons/all-files/fa/FaChevronLeft";
 import { FaChevronRight } from "@react-icons/all-files/fa/FaChevronRight";
-//import Pagination from "../pagination";
+
 interface ReacipeDetailProps {
   recipe: Recipe;
   page: string | null;

@@ -1,7 +1,6 @@
-import { authClient } from "../../lib/api";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import UserType from "../../type/user";
-import { RootState } from "../store";
+import { authClient } from "../../api";
+import { UserType } from "../../type";
 
 export const getUser = createAsyncThunk(`user/getUser`, async () => {
   const res = await authClient.get("user/info");
@@ -9,9 +8,8 @@ export const getUser = createAsyncThunk(`user/getUser`, async () => {
 });
 
 export const initialState: UserType = {
-  userId: 0,
   user: null,
-  name: "오종석",
+  nickname: "오종석",
   email: "",
   userGetLoading: false,
   userGetError: false,
