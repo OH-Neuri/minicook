@@ -34,7 +34,10 @@ const RecipeDetailPage = () => {
 
   useEffect(() => {
     setcurrentRecipe(recipe[recipeId]);
-    window.scrollTo(0, 0);
+    var width = window.innerWidth;
+    if (width > 860) window.scrollTo(0, 0);
+    console.log(width);
+    
   }, [searchParams]);
 
   return (

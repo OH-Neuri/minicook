@@ -20,11 +20,7 @@ const LikedSortTab: React.FC<LikedSortTabProps> = ({ onSwitch, onSort }) => {
   return (
     <LikedSortTabWrapper>
       {tabType.map((type, i) => (
-        <StyledTab
-          key={i}
-          className='tab'
-          onClick={() => handleTab(i)}
-          $isSelected={i === tab}>
+        <StyledTab key={i} onClick={() => handleTab(i)} $isSelected={i === tab}>
           {type}
         </StyledTab>
       ))}
@@ -35,12 +31,13 @@ const LikedSortTabWrapper = styled.div`
     width: 100%;
     height: 40px;
     display: flex;
-    max-width: 250px;
+    max-width: 260px;
 `;
 
 const StyledTab = styled.div<{ $isSelected: boolean }>`
     width: 50%;
     height: 100%;
+    min-width: 65px;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -30,16 +30,21 @@ const IngredientItem: React.FC<IngredientItemProps> = ({ onToggle, ingredient })
 const IngredientItemWrapper = styled.div<{ $isChecked: boolean }>`
     .item{
         padding: 2px 2px;
+        width: 100px;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 6.5rem;
-        height: 2.8rem;
+        height: 42px;
         margin-right: 0.5rem;
         border-radius: 5px;
         border: 1px solid #dddddd;
         color: white;
         font-weight: 600;
+
+        @media screen and (max-width: 400px) {
+          width: 80px;
+        }
+
         ${(props) =>
           props.$isChecked
             ? css`
@@ -51,6 +56,7 @@ const IngredientItemWrapper = styled.div<{ $isChecked: boolean }>`
             border-bottom:5px solid #d3ddd7;
             border: 2px solid #66716b
             `}
+
     &:hover{
         cursor: pointer;
     }

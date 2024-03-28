@@ -34,6 +34,12 @@ const CategoryWrapper = styled(NavLink)<{ $isSelect: boolean }>`
   @media screen and (max-width: 790px) {
     width: 145px;
   }
+  @media screen and (max-width: 495px) {
+    width: 130px;
+  }
+  @media screen and (max-width: 400px) {
+    width: 110px;
+  }
   
   ${(props) =>
     props.$isSelect

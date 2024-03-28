@@ -3,23 +3,23 @@ import styled from "styled-components";
 import ingredientsMenu, {
   IngredientsMenuType,
 } from "../../../pages/recipe/select/data/ingredients";
-import { IngredientsModal } from "../../common/modal";
-import Category from "../category/intex";
+import Category from "../../../components/recipeSelct/category/intex";
+import { IngredientsModal } from "../../../components/common/modal";
 
-interface SelectButtonProps {
+interface CategoryContainerProps {
   ingredientInfo: IngredientsMenuType[];
   onToggle: (ingredientName: string) => void;
 }
 
 /**
- * CategorySelectHeader 컴포넌트
+ * CategoryContainer 컴포넌트
  *
  * 레시피 선택 페이지에서 상단 재료 카테고리 영역을 나타냅니다.
  * @prop {IngredientsMenuType[]} ingredientInfo - 재료 정보 배열
  * @prop {function} onToggle -사용자가 선택한 재료 클릭 상태 업데이트 함수
  * @prop {function} onSelect -사용자가 선택한 재료 배열 상태 업데이트 함수
  */
-const CategorySelectHeader: React.FC<SelectButtonProps> = ({
+const CategoryContainer: React.FC<CategoryContainerProps> = ({
   ingredientInfo,
   onToggle,
 }) => {
@@ -70,7 +70,6 @@ const CategorySelectHeader: React.FC<SelectButtonProps> = ({
             <Category
               to={`/recipe/select/${menu.id}`}
               isSelectStyle={selectCategory === menu.id}
-              //isOpenStyle={isOpenModal}
               category={menu.category}
             />
           </div>
@@ -104,7 +103,13 @@ position: relative;
     max-width: 450px;
     height: 100px;
     }
+    @media screen and (max-width: 495px) {
+    max-width: 400px;
+    }
+    @media screen and (max-width: 400px) {
+    max-width: 340px;
+   }
   }
 
 `;
-export default CategorySelectHeader;
+export default CategoryContainer;

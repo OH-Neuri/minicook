@@ -6,8 +6,8 @@ import ingredientsMenu, { IngredientsMenuType } from "./data/ingredients";
 import RecipeViewBox from "../../../components/recipe/recipeViewBox";
 import Recipe from "../../../data/type/recipe";
 import recipe from "../../../data/recipe";
-import CategorySelectHeader from "../../../components/recipeSelct/categorySelectHeader";
 import IngredientsMiddleBadge from "../../../components/recipeSelct/ingredientsMiddleBadge/inex";
+import CategoryContainer from "../../../containers/recipeSelect/categoryContainer";
 
 /**
  * RecipeSelect 컴포넌트
@@ -110,9 +110,14 @@ const RecipeSelect = () => {
     handlefilterRecipes(selectedIngredients);
   }, [selectedIngredients]);
 
+  // 페이지 이동 시 최상단으로 이동
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <RecipeSelectWrapper>
-      <CategorySelectHeader
+      <CategoryContainer
         ingredientInfo={IngredientInfo}
         onToggle={handleIngredientToggle}
       />

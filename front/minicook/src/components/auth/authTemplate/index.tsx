@@ -20,10 +20,10 @@ const AuthTemplate: React.FC<AuthTemplateProps> = ({ children }) => {
 };
 
 const AuthTemplateWrapper = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background-color:#F4F1EB ;
-  position: absolute;
+  position: fixed;
   top: 0;
   left:0;
   bottom: 0;
@@ -48,6 +48,10 @@ const WhiteBox = styled.div`
   box-shadow: 0 0 8px rgba(0,0,0,0.025);
   padding: 2rem;
   border-radius: 2px;
+ @media screen and (max-width: 450px) {
+  width: 90%;
+}
+
 `;
 
 export default AuthTemplate;

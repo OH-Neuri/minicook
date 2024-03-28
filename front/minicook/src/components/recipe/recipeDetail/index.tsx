@@ -101,12 +101,17 @@ align-items: center;
   min-height: 390px;
   }
 
+
 .detail-content{
   width: 90%;
   height: 80%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media screen and (max-width: 550px) {
+  width: 80%;
+  }
 }
 `;
 

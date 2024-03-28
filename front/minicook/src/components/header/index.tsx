@@ -62,10 +62,21 @@ padding: 0px 20px;
   cursor: pointer;
   }
 `;
+
 const MainLogo = styled(Link)`
   display: flex;
   align-items: center;
   cursor: pointer;
+  @media screen and (max-width: 790px) {
+     > img{
+      width: 100px;
+     }
+  }
+    @media screen and (max-width: 500px) {
+     > img{
+      width: 90px;
+     }
+  }
 `;
 
 const StyledButton = styled.button`

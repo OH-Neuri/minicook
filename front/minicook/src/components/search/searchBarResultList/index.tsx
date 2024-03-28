@@ -65,6 +65,10 @@ const SearchBarListWrapper = styled.div`
     max-width: 400px;
     height: 280px;
     }
+    @media screen and (max-width: 450px) {
+    max-width: 330px;
+    height: 215px;
+    }
     &::-webkit-scrollbar-thumb{
         background: none
       }

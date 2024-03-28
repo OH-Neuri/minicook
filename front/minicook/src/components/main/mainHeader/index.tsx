@@ -54,7 +54,8 @@ const MainHeaderWrapper = styled.div`
 
     @media screen and (max-width: 790px) {
       min-width: 80px;
-      height: 750px;
+      height: 850px;
+      padding: 30px 20px;
     }
 
     .header-item-wide{
@@ -68,30 +69,30 @@ const MainHeaderWrapper = styled.div`
       justify-content: center;
       padding-top: 10px;  
     }   
-        .header-left {
-          flex-direction: column;
-          padding-top: 100px;
-          line-height: 1.8rem;
-          font-weight: 700;
+      .header-left {
+        flex-direction: column;
+        padding-top: 100px;
+        line-height: 1.8rem;
+        font-weight: 700;
 
-        @media screen and (max-width: 790px) {
-          padding-top: 20px;
-          height: 55%;
-        }
-            .text-top{
-              font-weight: 900;
-              font-size: 1.875rem /* 30px */;
-              line-height: 2.25rem
-            }
-            .text-middle{
-              font-weight: 900;
-            }
-            .text-bottom {
-              margin-top: 0.75rem;
-              font-weight: 400;
-              font-size: 0.875rem /* 14px */;
-              line-height: 1.25rem
-            }
+      @media screen and (max-width: 790px) {
+        padding-top: 5px;
+        height: 55%;
+      }
+          .text-top{
+            font-weight: 900;
+            font-size: 1.875rem /* 30px */;
+            line-height: 2.25rem
+          }
+          .text-middle{
+            font-weight: 900;
+          }
+          .text-bottom {
+            margin-top: 0.75rem;
+            font-weight: 400;
+            font-size: 0.875rem /* 14px */;
+            line-height: 1.25rem
+          }
     }
 
     .header-right{

@@ -42,7 +42,10 @@ const MainTopRecipeWrapper = styled.div`
     padding: 0 10px;
 
     @media screen and (max-width: 790px) {
-       height: 480px;
+       height: 470px;
+    }
+    @media screen and (max-width: 495px) {
+      height: 420px;
     }
 
     .header{
@@ -72,13 +75,21 @@ const MainTopRecipeWrapper = styled.div`
       cursor: pointer;
       padding: 30px 0px;
         @media screen and (max-width: 790px) {
-             flex-wrap: wrap;
+          gap:15px;
+          flex-wrap: wrap;
+
         }
       .image{
         width: 100%;
         max-width: 270px;
         @media screen and (max-width: 790px) {
-        max-width: 235px;
+          max-width: 210px;
+        }
+        @media screen and (max-width: 495px) {
+        max-width: 185px;
+        }
+        @media screen and (max-width: 390px) {
+        max-width: 160px;
         }
       }
       

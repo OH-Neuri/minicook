@@ -49,7 +49,7 @@ const NavBar: React.FC = () => {
           />
           {navBarOpen && <SearchBarResultBox input={input} recipe={recipe} />}
         </div>
-        <StyledText>#대파#삼겹살#김밥</StyledText>
+        <StyledText>#대파 #카레 #김밥</StyledText>
       </Section>
     </NavBarWrapper>
   );
@@ -87,7 +87,12 @@ const StyledLink = styled(Link)`
   font-weight: 600;
   
  @media screen and (max-width: 790px) {
-  min-width: 80px;
+  min-width: 70px;
+  font-size: 0.9rem;
+}
+ @media screen and (max-width: 400px) {
+  min-width: 60px;
+  font-size: 0.75rem;
 }
 `;
 
@@ -102,7 +107,14 @@ const StyledText = styled.div`
   font-weight: 300;
 // 모바일
  @media screen and (max-width: 790px) {
-  min-width: 80px;
+  min-width: 30px;
+  max-width: 80px;
+  font-size:0.7rem;
+}
+  @media screen and (max-width: 400px) {
+  min-width: 40px;
+  max-width: 50px;
+  font-size: 0.75rem;
 }
 `;
 

@@ -40,6 +40,11 @@ const SearchBarInfoWrapper = styled.div`
       max-width: 450px;
       height: 600px;
     }
+    @media screen and (max-width: 450px) {
+      max-width: 450px;
+      height: 480px;
+    }
+
 
     @keyframes fadeIn {
     from {

@@ -22,7 +22,7 @@ const SearchBarForm: React.FC<SearchBarFormProps> = ({
   return (
     <SearchBarWrapper className='cursor-pointer' onClick={handleSearchBar}>
       <div className='search-icon focus:hidden'>
-        <IoSearchOutline size={22} />
+        <IoSearchOutline size={20} />
       </div>
       <div className='search-input-wrapper' onClick={(e) => handleSearchBar(e)}>
         <input
@@ -48,11 +48,14 @@ const SearchBarWrapper = styled.div`
  border-radius: 20px;
 
  @media screen and (max-width: 790px) {
-  width: 260px;
+  width: 210px;
 }
+ @media screen and (max-width: 400px) {
+  width: 190px;
 
+}
  .search-icon{
-  width: 8%;
+  width: 20px;
  }
 
  .search-input-wrapper{

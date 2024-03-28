@@ -46,16 +46,20 @@ const IngredientsModalWrapper = styled.div`
     border: 1px solid #acb7a7;
     overflow-y: scroll;
 
-    @media screen and (max-width: 790px) {
+  @media screen and (max-width: 790px) {
     top: 100px;
-    width: 450px;
+    width: 400px;
   }
-
+  @media screen and (max-width: 400px) {
+    top: 100px;
+    width: 340px
+  }
     .button-wrapper{
       display: flex;
       flex-wrap: wrap;
-      margin-top: 19px;
-      margin-left: 43px;
+      align-items: center;
+      padding-left: 30px;
+      padding-top: 20px;
       gap:11px;
     }
 `;
