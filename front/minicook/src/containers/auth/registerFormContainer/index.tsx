@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 import styled from "styled-components";
@@ -12,61 +12,66 @@ interface RegisterFormProps {
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ type }) => {
   const navigate = useNavigate();
-  const [registerSuccess, setRegisterSuccess] = useState<boolean>(false);
-  const [auth, setAuth] = useState<boolean>(false);
-  const [authError, setAuthError] = useState<AxiosError | null>(null);
-  const [error, setError] = useState<string>("");
+  const [auth, setAuth] = useState<boolean>(false); // 회원가입 성공 여부
+  const [authError, setAuthError] = useState<AxiosError | null>(null); // 회원가입 실패 여부
+  const [error, setError] = useState<string>(""); // 회원가입 실패 메시지
   const [form, setForm] = useState<formType>({
+    // 사용자 회원가입 정보
     email: "",
     password: "",
     passwordConfirm: "",
-    name: "",
+    nickname: "",
   });
-  
-  const handleButton = () => setRegisterSuccess(false);
+
+  const handleButton = () => setAuth(false);
+
   const handleChange = (name: string, value: string) => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = () => {
-    // 유효성 검사
+  // 유효성 검사
+  const handleSubmit = useCallback(() => {
     // 이메일 혹은 비밀번호를 입력하지 않았을 떄,
-    if (form.email === "" || form.password === "") {
-      setError(`이메일 혹은 비밀번호가 입력되지 않았습니다.`);
+    if (form.email === "") {
+      alert(`이메일을 입력해 주세요.`);
+      return;
+    }
+    if (form.password === "") {
+      alert(`비밀번호를 입력해 주세요.`);
+      return;
     }
     // 이메일 형식이 올바르지 않을 때,
     const EAMAIL_PATTERN = /^[a-zA-Z0-9\.]+@[a-z0-9\.\-\_]+.co/;
     if (EAMAIL_PATTERN.test(form.email) === false) {
-      setError(`이메일 형식이 올바르지 않습니다.`);
+      alert(`이메일 형식이 올바르지 않습니다.`);
       return;
     }
     // 비밀번호 형식이 올바르지 않을 떄,
     const PASSWORD_PATTERN = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\!\@\-\~]).+$/;
     if (PASSWORD_PATTERN.test(form.password) === false) {
-      setError(`비밀번호는 영문, 숫자, 특수문자(!,@,-,~)를 모두 포함해야 합니다.`);
+      alert(`비밀번호는 영문, 숫자, 특수문자(!,@,-,~)를 모두 포함해야 합니다.`);
       return;
     }
     if (form.password !== form.passwordConfirm) {
-      setError(`비밀번호가 일치하지 않습니다.`);
+      alert(`비밀번호가 일치하지 않습니다.`);
       return;
     }
     // 회원가입 api 요청
-    if (
-      form.email === "js@asd.co" &&
-      form.password === "qq11!" &&
-      form.passwordConfirm === "qq11!"
-    ) {
-      setAuth(true);
-      setRegisterSuccess(true);
-      //setAuthError(null);
-    } else {
-      //setAuthError(실패결과);
-    }
-  };
+    //if (
+    //  form.email === "js@asd.co" &&
+    //  form.password === "qq11!" &&
+    //  form.passwordConfirm === "qq11!"
+    //) {
+    //  setAuth(true);
+    //  setAuthError(null);
+    //} else {
+    //  setAuthError(null); // <- 실패 응답 넣기
+    //}
+  }, [form]);
 
   // 컴포넌트가 처음 렌더링될 때 form을 초기화함
   useEffect(() => {
-    setForm({ email: "", password: "", passwordConfirm: "", name: "" });
+    setForm({ email: "", password: "", passwordConfirm: "", nickname: "" });
   }, []);
 
   // 로그인 성공/실패 처리
@@ -82,21 +87,19 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ type }) => {
     }
     if (auth) {
       // 로그인 확인 -> 성공하면 로컬스토리지 저장
-      console.log(auth);
     }
   }, [auth, authError]);
 
   return (
     <RegisterFormWrapper>
-      {registerSuccess ? (
+      {auth ? (
         <SuccessRegist onRegist={handleButton} />
       ) : (
         <AuthForm
           form={form}
           type={type}
-          auth={auth}
           error={error}
-          onChange={handleChange}
+          onChangeInput={handleChange}
           onSubmit={handleSubmit}
         />
       )}
@@ -109,6 +112,6 @@ const RegisterFormWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 
 export default RegisterForm;

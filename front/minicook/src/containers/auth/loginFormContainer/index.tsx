@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -6,7 +6,7 @@ import { formType } from "../type";
 import { RootState } from "../../../store/store";
 import { setEmail, tempSetUser } from "../../../store/reducers/user";
 import AuthForm from "../../../components/auth/authForm/indetx";
-
+import { authClient } from "../../../api";
 
 interface LoginFromProps {
   type: string;
@@ -23,33 +23,38 @@ const LoginFromContainer: React.FC<LoginFromProps> = ({ type }) => {
     email: "",
     password: "",
     passwordConfirm: "",
-    name: "",
+    nickname: "",
   });
 
   const handleChange = (name: string, value: string) => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = () => {
-    // 유효성 검사
-    // 이메일 혹은 비밀번호를 입력하지 않았을 떄,
-    if (form.email === "" || form.password === "") {
-      alert(`이메일 혹은 비밀번호가 입력되지 않았습니다.`);
+  // 유효성 검사
+  const handleSubmit = useCallback(() => {
+    alert(`이메일: ${form.email}, 비밀번호: ${form.password}`);
+    if (form.email === "") {
+      alert(`이메일을 입력해 주세요.`);
+      return;
+    }
+    if (form.password === "") {
+      alert(`비밀번호를 입력해 주세요.`);
       return;
     }
     // 로그인 api
-    if (form.email === "js@asd.co" && form.password === "qq11!") {
-      setAuth(true);
-    } else {
-      // 로그인 성공 setAuth(true)
-      alert("로그인 실패 ~~");
-    }
+
+    //if (form.email === "js@asd.co" && form.password === "qq11!") {
+    //  setAuth(true);
+    //} else {
+    //  // 로그인 성공 setAuth(true)
+    //  alert("로그인 실패 ~~");
+    //}
     // 로그인 실패 setAuthError(실패결과)
-  };
+  }, [form]);
 
   // 컴포넌트가 처음 렌더링될 때 form을 초기화함
   useEffect(() => {
-    setForm({ email: "", password: "", passwordConfirm: "", name: "" });
+    setForm({ email: "", password: "", passwordConfirm: "", nickname: "" });
   }, []);
 
   // 로그인 성공/실패 처리
@@ -87,9 +92,8 @@ const LoginFromContainer: React.FC<LoginFromProps> = ({ type }) => {
     <AuthForm
       form={form}
       type={type}
-      auth={auth}
       error={error}
-      onChange={handleChange}
+      onChangeInput={handleChange}
       onSubmit={handleSubmit}
     />
   );

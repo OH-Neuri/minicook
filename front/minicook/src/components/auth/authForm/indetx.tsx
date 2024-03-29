@@ -7,31 +7,29 @@ import { formType } from "../../../containers/auth/type";
 interface AuthFormProps {
   form: formType;
   type: string;
-  auth: boolean;
   error: string;
-  onChange: (name: string, value: string) => void;
+  onChangeInput: (name: string, value: string) => void;
   onSubmit: () => void;
 }
+const textMap: { [key: string]: string } = { login: "로그인", register: "회원가입" };
+
 const AuthForm: React.FC<AuthFormProps> = ({
   form,
   type,
-  auth,
   error,
-  onChange,
+  onChangeInput,
   onSubmit,
 }) => {
-  const textMap: { [key: string]: string } = { login: "로그인", register: "회원가입" };
   const text = textMap[type];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    onChange(name, value);
+    onChangeInput(name, value);
   };
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit();
-    //onSubmit();
   };
 
   return (
@@ -68,7 +66,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
               name='nickname'
               placeholder='닉네임'
               onChange={handleChange}
-              value={form.name}
+              value={form.nickname}
             />
           </>
         )}
@@ -90,60 +88,61 @@ const AuthForm: React.FC<AuthFormProps> = ({
 };
 
 const AuthFormWrapper = styled.div`
-h3{
+  h3{
     margin: 0;
     color: #4d4d4d;
     margin-bottom: 1rem;
     font-size: larger;
     font-weight: 600;
-    
-}
+      
+  }
 
 .footer{
-    margin-top: 2rem;
-    text-align:center;
-    a{
-        color:#9e9e9e;
-        text-decoration: underline;
-        &:hover{
-            color:#525252;
-        }
+  margin-top: 2rem;
+  text-align:center;
+  a{
+    color:#9e9e9e;
+    text-decoration: underline;
+    &:hover{
+        color:#525252;
     }
+  }
 }
 `;
+
 const ErrorText = styled.div`
-display: flex;
-justify-content: center;
-text-align: center;
-color: #e41300;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: #e41300;
 `;
 
 const StyledButton = styled.button`
-    width: 100%;
-    margin-top: 2rem;
-    background-color: #476801;
-    border-radius: 5px;
-    color:white;
-    height: 3rem;
-    &:hover{
-        background-color: #365000;
-    }
+  width: 100%;
+  margin-top: 2rem;
+  background-color: #476801;
+  border-radius: 5px;
+  color:white;
+  height: 3rem;
+  &:hover{
+      background-color: #365000;
+  }
 `;
 
 const StyledInput = styled.input`
-font-size: 1rem;
-border:none;
-border-bottom: 1px solid #9e9e9e;
-padding-bottom: 0.5rem;
-outline:none;
-width: 100%;
-&:focus{
-    color: $oc-teal-7;
-    border-bottom: 1px solid #9e9e9e;
-}
-& + & {
-    margin-top : 1rem;
-}
+  font-size: 1rem;
+  border:none;
+  border-bottom: 1px solid #9e9e9e;
+  padding-bottom: 0.5rem;
+  outline:none;
+  width: 100%;
+  &:focus{
+      color: $oc-teal-7;
+      border-bottom: 1px solid #9e9e9e;
+  }
+  & + & {
+      margin-top : 1rem;
+  }
 `;
 
 export default AuthForm;
