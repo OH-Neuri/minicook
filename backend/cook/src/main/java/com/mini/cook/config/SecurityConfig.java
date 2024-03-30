@@ -17,17 +17,16 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.List;
+
 
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
         return http
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(it->it.disable())
@@ -57,7 +56,7 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE","OPTIONS"));
 //        config.addAllowedOrigin("http://127.0.0.1:3000");
         config.addAllowedOrigin("*");
         config.setAllowCredentials(true);
