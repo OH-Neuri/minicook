@@ -27,14 +27,16 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtProvider jwtProvider;
-
+    private final CustomException noAccessToken = CustomException.builder()
+            .exceptionName("NoAccessToken").message("accessToken이 비어있습니다.")
+                .build();
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
 
         Cookie[] cookies = request.getCookies();
 
         if(cookies == null) {
-            setException(getNoAccessTokenException());
+            setException(noAccessToken);
             filterChain.doFilter(request,response);
             return;
         }
@@ -44,7 +46,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         ).findAny();
 
         if(accessTokenCookie.isEmpty()) {
-            setException(getNoAccessTokenException());
+            setException(noAccessToken);
             filterChain.doFilter(request,response);
             return;
         }
@@ -63,11 +65,5 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         Authentication noAuth = UsernamePasswordAuthenticationToken.unauthenticated(e, null);
         SecurityUtil.setAuthentication(noAuth);
         log.error(e.getExceptionName() + " : " + e.getMessage());
-    }
-
-    private CustomException getNoAccessTokenException(){
-        return CustomException.builder()
-                .exceptionName("NoAccessToken").message("accessToken이 비어있습니다.")
-                .build();
     }
 }

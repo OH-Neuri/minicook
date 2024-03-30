@@ -14,6 +14,6 @@ public class CustomException extends RuntimeException{
 
     public CustomException(String message, Throwable cause){
         super(message, cause);
-        this.exceptionName = cause.getClass().getName();
+        this.exceptionName = cause.getClass().getSimpleName();
     }
 }
