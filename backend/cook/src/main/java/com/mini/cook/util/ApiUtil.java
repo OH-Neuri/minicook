@@ -13,6 +13,6 @@ public class ApiUtil {
         return new Result<>(ResultStatus.FAIL,null, new ErrorCode(cause, message));
     }
     public static <T extends RuntimeException> Result<?> error(T ex){
-        return new Result<>(ResultStatus.FAIL,null, new ErrorCode(ex.getClass().getName(), ex.getMessage()));
+        return new Result<>(ResultStatus.FAIL,null, new ErrorCode(ex.getClass().getSimpleName(), ex.getMessage()));
     }
 }
