@@ -1,7 +1,4 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-//import { getAnalytics } from "firebase/analytics";
-import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -16,7 +13,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const firebase = initializeApp(firebaseConfig);
-const auth = getAuth(firebase); // for 인증
 const fireStore = getFirestore(firebase); // for 데이터베이스
 
-export { auth, fireStore };
+export { fireStore };
