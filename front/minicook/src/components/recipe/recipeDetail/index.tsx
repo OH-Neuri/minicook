@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import Recipe from "../../../data/type/recipe";
 import { FaChevronLeft } from "@react-icons/all-files/fa/FaChevronLeft";
 import { FaChevronRight } from "@react-icons/all-files/fa/FaChevronRight";
+import { RecipeType } from "../../../type";
 
 interface ReacipeDetailProps {
-  recipe: Recipe;
+  recipe: RecipeType;
   page: string | null;
   onChangePage: (pageIndex: number) => void;
 }

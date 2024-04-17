@@ -29,9 +29,7 @@ const CategoryContainer: React.FC<CategoryContainerProps> = ({
   const handleOpenModal = () => setInOpenModal(true);
   const handleCloseModal = () => setInOpenModal(false);
 
-  /**
-   * 버튼을 재클릭하면 모달창이 닫히고 색을 변경하는 함수
-   */
+
   const handleButton = (id: number) => {
     if (selectCategory == id) {
       setSelectCategory(-1);
@@ -42,9 +40,6 @@ const CategoryContainer: React.FC<CategoryContainerProps> = ({
   };
 
   useEffect(() => {
-    /**
-     * 모달창 영역 밖을 클릭하면 모달창 닫는 함수
-     */
     const handleModal = (e: { target: any }) => {
       if (isOpenModal && modalRef.current && !modalRef.current.contains(e.target)) {
         handleCloseModal();

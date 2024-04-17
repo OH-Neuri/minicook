@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -8,14 +8,14 @@ import {
   setSliceRemoveIndex,
 } from "../../../store/reducers/userLiked";
 
-import Recipe from "../../../data/type/recipe";
 import Badge from "../../common/badge";
 import { formatNumberWithCommas } from "../../../utils/formatNumberWithCommas";
 import { TiHeart } from "@react-icons/all-files/ti/TiHeart";
 import { FaRegCheckSquare } from "@react-icons/all-files/fa/FaRegCheckSquare";
+import { RecipeType } from "../../../type";
 
 interface ReacipeCardProps {
-  recipe: Recipe;
+  recipe: RecipeType;
   detail: boolean;
   modify?: boolean;
 }
@@ -35,31 +35,31 @@ export const RecipeCard: React.FC<ReacipeCardProps> = ({ recipe, detail, modify 
   const [select, setSelect] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
 
-  const handleButton = useCallback(() => {
-    // 변경 모드이면,
+  const handleButton = () => {
     if (modify) {
+      // 변경 모드
       selectRecipe();
     } else {
-      // 상세 모드이면,
+      // 상세 모드
       navigateToPage();
     }
-  }, [modify]);
+  };
 
   // 레시피 상세보기
-  const navigateToPage = useCallback(() => {
+  const navigateToPage = () => {
     navigate(`/recipe?id=${id}&page=${1}`);
-  }, [id]);
+  };
 
   // 레시피 선택하기
   const selectRecipe = useCallback(() => {
     if (!select) {
-      setSelect((prev) => !prev);
+      setSelect(true);
       dispatch(setAddRemoveIndex(id));
     } else {
-      setSelect((prev) => !prev);
+      setSelect(false);
       dispatch(setSliceRemoveIndex(id));
     }
-  }, [id]);
+  }, [select]);
 
   return (
     <ReacipeCardWrapper $isDetail={detail} onClick={handleButton}>
@@ -79,9 +79,26 @@ export const RecipeCard: React.FC<ReacipeCardProps> = ({ recipe, detail, modify 
       </div>
       <div className='card-content'>
         <div className='card-info'>
-          {ingredients.slice(0, 3).map((ingredient, i) => (
-            <div className='card-ingredients' key={i}>{`#${ingredient}`}</div>
-          ))}
+          {ingredients.slice(0, 3).map((ingredient, i) => {
+            // 정규 표현식을 사용하여 처리된 재료 문자열 생성
+            const processedIngredient = ingredient
+              // "오뚜기" 제거
+              .replace(/오뚜기/g, "")
+              // "맛있는" 제거
+              .replace(/맛있는/g, "")
+              // 대괄호로 묶인 내용 제거
+              .replace(/\[[^)]*\]/g, "")
+              // 괄호로 묶인 내용 제거
+              .replace(/\([^)]*\)/g, "")
+              // 숫자와 글자 합쳐진 내용 제거
+              .replace(/\d+[^\d\s]+/g, "")
+              // 공백 제거
+              .trim();
+            // 처리된 재료 문자열을 반환
+            return (
+              <div className='card-ingredients' key={i}>{`#${processedIngredient}`}</div>
+            );
+          })}
           {like > 100 && (
             <div className='card-tag'>
               <Badge tagText='인기' bgColor='#ffa600' size='3rem' />

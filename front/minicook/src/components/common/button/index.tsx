@@ -1,13 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import Recipe from "../../../data/type/recipe";
 import { GoPlus } from "@react-icons/all-files/go/GoPlus";
-export const button = ({}) => {
-  return <div>Button</div>;
-};
+import { RecipeType } from "../../../type";
 
 interface RecipeLikeButtonProps {
-  recipe: Recipe;
+  recipe: RecipeType;
 }
 
 export const RecipeLikeButton: React.FC<RecipeLikeButtonProps> = ({ recipe }) => {
@@ -34,7 +31,6 @@ const RecipeLikeButtonBlock = styled.div`
   
   &:hover{
     filter: brightness(80%);
-  
   }
   .button-text{
     display: flex;
@@ -43,6 +39,5 @@ const RecipeLikeButtonBlock = styled.div`
     font-weight: 500;
     font-size: medium;
     color:white;
-
   }
 `;

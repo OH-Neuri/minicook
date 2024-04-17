@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 
 import RecipeDetail from "../../../components/recipe/recipeDetail";
 import RecipeCard from "../../../components/recipe/recipeCard";
-import Recipe from "../../../data/type/recipe";
-import recipe from "../../../data/recipe";
+
 import { RecipeLikeButton } from "../../../components/common/button";
 import RecipeIngredients from "../../../components/recipe/recipeIngredients";
+import { RecipeType } from "../../../type";
+import { fireStore } from "../../../firebase/firebaseClient";
+import { doc, getDoc } from "firebase/firestore";
 
 const RecipeDetailPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const recipeId = Number(searchParams.get("id"));
   const page = searchParams.get("page");
-
-  const [currentRecipe, setcurrentRecipe] = useState<Recipe>({
-    id: 0,
+  const [detailRecipe, setDetailRecipe] = useState<RecipeType>({
+    id: "",
     name: "",
     like: 0,
     ingredients: [],
@@ -32,27 +32,41 @@ const RecipeDetailPage = () => {
     });
   };
 
+  const getRecipe = useCallback(async (id: string) => {
+    const recipeDoc = doc(fireStore, "recipe", id);
+    const docSnap = await getDoc(recipeDoc);
+    if (docSnap.exists()) {
+      const data = docSnap.data() as RecipeType;
+      setDetailRecipe(data);
+    }
+  }, []);
+
   useEffect(() => {
-    setcurrentRecipe(recipe[recipeId]);
     var width = window.innerWidth;
     if (width > 860) window.scrollTo(0, 0);
-    console.log(width);
-    
   }, [searchParams]);
+
+  useEffect(() => {
+    const recipeId: string | null = searchParams.get("id");
+    if (recipeId) getRecipe(recipeId);
+  }, []);
 
   return (
     <RecipeDetailPageWrapper>
       <div className='detail-info'>
-        <RecipeCard recipe={currentRecipe} detail={true} />
-        <RecipeLikeButton recipe={currentRecipe} />
-        <RecipeIngredients ingredients={currentRecipe.ingredients} />
+        <RecipeCard recipe={detailRecipe} detail={true} />
+        <RecipeLikeButton recipe={detailRecipe} />
+        <RecipeIngredients ingredients={detailRecipe.ingredients} />
       </div>
-      <RecipeDetail recipe={currentRecipe} page={page} onChangePage={handlePage} />
+      <RecipeDetail recipe={detailRecipe} page={page} onChangePage={handlePage} />
     </RecipeDetailPageWrapper>
   );
 };
+
 const RecipeDetailPageWrapper = styled.div`
   width: 100%;
+  height: 70%;
+
   padding: 60px 20px 40px 20px;
   background-color: #F4F1EB;
   display: flex;
@@ -64,6 +78,7 @@ const RecipeDetailPageWrapper = styled.div`
     justify-content: center;
   }
  @media screen and (max-width: 860px) {
+  height:1200px;
   flex-wrap: wrap;
   }
 `;
