@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 import styled from "styled-components";
 import { formType } from "../type";
 import AuthForm from "../../../components/auth/authForm/indetx";
 import SuccessRegist from "../../../components/auth/registSuccess";
-import register from "../../../api/auth/register";
+//import register from "../../../api/auth/register";
 
 interface RegisterFormProps {
   type: string;
@@ -60,7 +60,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ type }) => {
 
     // 회원가입
     try {
-      const data = await register({ email: form.email, password: form.password });
+      //const data = await register({ email: form.email, password: form.password });
       setAuth(true);
       setAuthError(null);
     } catch (error: any) {
