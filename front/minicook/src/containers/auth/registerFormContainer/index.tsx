@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { formType } from "../type";
 import AuthForm from "../../../components/auth/authForm/indetx";
 import SuccessRegist from "../../../components/auth/registSuccess";
+import register from "../../../api/auth/register";
 
 interface RegisterFormProps {
   type: string;
@@ -30,7 +31,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ type }) => {
   };
 
   // 유효성 검사
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = useCallback(async () => {
     // 이메일 혹은 비밀번호를 입력하지 않았을 떄,
     if (form.email === "") {
       alert(`이메일을 입력해 주세요.`);
@@ -56,24 +57,16 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ type }) => {
       alert(`비밀번호가 일치하지 않습니다.`);
       return;
     }
-    // 회원가입 api 요청
-    //if (
-    //  form.email === "js@asd.co" &&
-    //  form.password === "qq11!" &&
-    //  form.passwordConfirm === "qq11!"
-    //) {
-    //  setAuth(true);
-    //  setAuthError(null);
-    //} else {
-    //  setAuthError(null); // <- 실패 응답 넣기
-    //}
+
+    // 회원가입
+    try {
+      const data = await register({ email: form.email, password: form.password });
+      setAuth(true);
+      setAuthError(null);
+    } catch (error: any) {
+      setAuthError(error.message);
+    }
   }, [form]);
-
-  // 컴포넌트가 처음 렌더링될 때 form을 초기화함
-  useEffect(() => {
-    setForm({ email: "", password: "", passwordConfirm: "", nickname: "" });
-  }, []);
-
   // 로그인 성공/실패 처리
   useEffect(() => {
     if (authError) {
@@ -85,10 +78,12 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ type }) => {
       setError("회원가입 실패");
       return;
     }
-    if (auth) {
-      // 로그인 확인 -> 성공하면 로컬스토리지 저장
-    }
-  }, [auth, authError]);
+  }, [authError]);
+
+  // 컴포넌트가 처음 렌더링될 때 form을 초기화함
+  useEffect(() => {
+    setForm({ email: "", password: "", passwordConfirm: "", nickname: "" });
+  }, []);
 
   return (
     <RegisterFormWrapper>
