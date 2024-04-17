@@ -9,7 +9,7 @@ import { ThemeProvider } from "styled-components";
 import { theme } from "./style";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
-import { tempSetUser } from "./store/reducers/user";
+import { tempSetUser } from "./store/reducers/userAccess";
 
 function loadUser() {
   try {

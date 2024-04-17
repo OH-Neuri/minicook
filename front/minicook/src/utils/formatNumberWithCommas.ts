@@ -1,3 +1,3 @@
-export const formatNumberWithCommas = (like: number) => {
+export const formatNumberWithCommas = (like: number | string) => {
   return like.toLocaleString();
 };
