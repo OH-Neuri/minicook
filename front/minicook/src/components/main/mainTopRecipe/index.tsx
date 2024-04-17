@@ -1,12 +1,30 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { RecipeType } from "../../../type";
 
-interface MainTopRecipeProps {
-  recipe: RecipeType[];
-}
-const MainTopRecipe: React.FC<MainTopRecipeProps> = ({ recipe }) => {
+const MainTopRecipe: React.FC = () => {
+  const recipe = [
+    {
+      id: "gp5eKD8AeyhhPNm7bszM",
+      name: "햄마요덮밥",
+      thumbnail: "https://ottogi.okitchen.co.kr/pds/upfile/2020-08-25_427865954[13].jpg",
+    },
+    {
+      id: "8k4S6HRY50iDADFiQkWz",
+      name: "콘치즈",
+      thumbnail: "https://ottogi.okitchen.co.kr/pds/upfile/2020-08-25_427863666[9].jpg",
+    },
+    {
+      id: "Dy8o6nmsOgAqnKNrhbLf",
+      name: "유자 연근조림",
+      thumbnail: "https://ottogi.okitchen.co.kr/pds/upfile/2020-08-24_427853121[15].jpg",
+    },
+    {
+      id: "oPOW2ByENWJ2KIro56Ar",
+      name: "연어샐러드",
+      thumbnail: "https://ottogi.okitchen.co.kr/pds/upfile/2020-08-24_427850333[27].jpg",
+    },
+  ];
   return (
     <MainTopRecipeWrapper>
       <div className='header'>
@@ -14,8 +32,8 @@ const MainTopRecipe: React.FC<MainTopRecipeProps> = ({ recipe }) => {
         <span className='header-text-rank'>TOP 4</span>
       </div>
       <div className='image-wrapper'>
-        {recipe.slice(0, 4).map(({ id, thumbnail }, v) => (
-          <StyledImage key={id} to={`/recipe/${id}`}>
+        {recipe.splice(0, 4).map(({ id, thumbnail }, v) => (
+          <StyledImage key={id} to={`/recipe?id=${id}&page=1`}>
             <img
               className='image'
               src={thumbnail}

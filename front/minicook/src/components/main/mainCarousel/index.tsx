@@ -1,9 +1,7 @@
 import React, { useRef } from "react";
 import { BsChevronLeft } from "@react-icons/all-files/bs/BsChevronLeft";
 import { BsChevronRight } from "@react-icons/all-files/bs/BsChevronRight";
-import { FaCircle } from "@react-icons/all-files/fa/FaCircle";
 import styled from "styled-components";
-import { RecipeType } from "../../../type";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
@@ -13,20 +11,19 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-interface MainCarouselProps {
-  recipe: RecipeType[];
-}
-const MainCarousel: React.FC<MainCarouselProps> = ({ recipe }) => {
+const sliderImages = [
+  "https://ottogi.okitchen.co.kr/pds/editor/30_1.jpg",
+  "https://ottogi.okitchen.co.kr/pds/editor/40_1.jpg",
+  "https://ottogi.okitchen.co.kr/pds/editor/32_1.jpg",
+  "https://ottogi.okitchen.co.kr/pds/editor/52_1.jpg",
+  "https://ottogi.okitchen.co.kr/pds/editor/61_1.jpg",
+  "https://ottogi.okitchen.co.kr/pds/editor/76_1.jpg",
+];
+
+const MainCarousel: React.FC = () => {
   SwiperCore.use([Autoplay, Navigation]);
-  const sliderImages = [
-    "https://ottogi.okitchen.co.kr/pds/editor/30_1.jpg",
-    "https://ottogi.okitchen.co.kr/pds/editor/30_2.jpg",
-    "https://ottogi.okitchen.co.kr/pds/editor/30_3.jpg",
-    "https://ottogi.okitchen.co.kr/pds/editor/30_4.jpg",
-  ];
   const prevRef = useRef(null);
   const nextRef = useRef(null);
-
   return (
     <MainCarouselWrapper>
       <div className='section'>
@@ -37,9 +34,9 @@ const MainCarousel: React.FC<MainCarouselProps> = ({ recipe }) => {
             레시피 찾기
           </div>
           <div className='text-bottom'>
-            <span>카테고리 별로 원하는 레시피를</span>
+            <span>처리해야하는 식재료들을 골라보세요.</span>
             <br />
-            <span>추천 받을 수 있어요.</span>
+            <span>다양한 레시피를 알려드려요.</span>
           </div>
         </div>
         <Swiper
@@ -60,9 +57,8 @@ const MainCarousel: React.FC<MainCarouselProps> = ({ recipe }) => {
           className='mySwiper'>
           {sliderImages.map((value, index) => {
             return (
-              <SwiperSlide>
+              <SwiperSlide key={index}>
                 <img
-                  key={index}
                   src={`${value}`}
                   className='object-contain w-50 h-50'
                   alt='Carousel'
@@ -93,7 +89,6 @@ const MainCarouselWrapper = styled.div`
   align-items: center;
 
   background-color: ${(props) => props.theme.colors.bgColor};
-
   @media screen and (max-width: 980px) {
       max-height: 700px;
   }
@@ -137,10 +132,8 @@ const MainCarouselWrapper = styled.div`
       @media screen and (max-width: 980px) {
       flex-wrap: wrap;    
       max-height: 750px;
+    }
   }
-  }
-
-
 `;
 
 const StyledButton = styled.button`
@@ -152,10 +145,6 @@ const StyledButton = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
-`;
-
-const CircleIcon = styled(FaCircle)<{ $active: boolean }>`
-    fill: ${({ $active }) => ($active ? "#4d4435" : "#c9c1b1")};
 `;
 
 export default MainCarousel;

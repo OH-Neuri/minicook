@@ -4,14 +4,14 @@ import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 import { RootState } from "../../../store/store";
-import { tempSetUser } from "../../../store/reducers/user";
+import { tempSetUser } from "../../../store/reducers/userAccess";
 import { setResetRemoveIndex } from "../../../store/reducers/userLiked";
 import Header from "../../../components/header";
 import NavBar from "../../../components/navBar";
 
 const HeaderContainer = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state: RootState) => state.user.user);
+  const user = useSelector((state: RootState) => state.userAccess.user);
   const navigate = useNavigate();
 
   const handleLogout = () => {
