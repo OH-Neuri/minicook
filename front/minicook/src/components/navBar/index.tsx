@@ -1,28 +1,25 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import recipe from "../../data/recipe";
 import useDebounce from "../../hooks/useDebounce";
 import SearchBarForm from "../search/searchBarForm";
-import SearchBarResultBox from "../search/searchBarResultBox";
+import SearchBarContainer from "../../containers/search/searchBarContainer";
 
 const NavBar: React.FC = () => {
   const [navBarOpen, setNavBarOpen] = useState<boolean>(false); // 검색 바의 열림/닫힘 상태를 관리하는 상태 변수
   const navbarInfoRef = useRef<HTMLDivElement | null>(null); // 검색 바의 정보를 참조하는 ref
   const [input, setInput] = useState<string>(""); // 검색어를 관리하는 상태 변수
-  const debounceInput = useDebounce(input, 1000); // 검색어 입력의 디바운스를 적용한 값
+  const debounceInput = useDebounce(input, 800); // 검색어 입력의 디바운스를 적용한 값
 
   const handleOpenSearchBar = () => setNavBarOpen(true); // 검색 바 열기 이벤트 핸들러
   const handleCloseSearchBar = () => setNavBarOpen(false); // 검색 바 닫기 이벤트 핸들러
 
-  const handleInput = useCallback((input: string) => {
-    setInput(input);
-  }, []);
-
-  // 검색어가 변경될 때마다 API 요청을 실행
-  useEffect(() => {
-    //console.log("api요청");
-  }, [debounceInput]);
+  const handleInput = useCallback(
+    (input: string) => {
+      setInput(input);
+    },
+    [input]
+  );
 
   // 검색바가 열려 있고 외부를 클릭할 때 검색바를 닫음
   useEffect(() => {
@@ -47,7 +44,7 @@ const NavBar: React.FC = () => {
             onChangeInput={handleInput}
             onSearchClick={handleOpenSearchBar}
           />
-          {navBarOpen && <SearchBarResultBox input={input} recipe={recipe} />}
+          {navBarOpen && <SearchBarContainer input={debounceInput} />}
         </div>
         <StyledText>#대파 #카레 #김밥</StyledText>
       </Section>

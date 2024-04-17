@@ -28,7 +28,8 @@ const SearchBarForm: React.FC<SearchBarFormProps> = ({
         <input
           className='search-input'
           placeholder='재료, 요리명 등 다양하게 검색해보세요! (예: 마늘)'
-          onChange={handleInput}></input>
+          onChange={handleInput}
+        />
       </div>
     </SearchBarWrapper>
   );
