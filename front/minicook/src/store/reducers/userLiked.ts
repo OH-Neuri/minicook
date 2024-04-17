@@ -28,7 +28,7 @@ export const getLikedRecipesDictionary = createAsyncThunk(
 // 좋아요 레시피 삭제하기
 export const removeLikedRecipes = createAsyncThunk(
   `userLiked/removedLikedRecipes`,
-  async (removeIndex: number[]) => {
+  async (removeIndex: string[]) => {
     const requestData = { removeIndex };
     const res = await authClient.post("user/like", requestData);
     return res.data;
@@ -36,22 +36,31 @@ export const removeLikedRecipes = createAsyncThunk(
 );
 
 export const initialState: UserLikedType = {
-  recipe: [],
+  recipeId: [],
   recipeGetLoading: false,
   recipeGetError: false,
+  tab: 0,
+  isModify: false,
+  removeRecipeId: [],
   recipeRemoveLoading: false,
   recipeRemoveError: false,
-  tab: 0,
-  modify: false,
-  removeIndex: [],
 };
 
 const userLikedSlice = createSlice({
   name: "userLiked",
   initialState,
   reducers: {
-    setRecipe(state, action) {
-      state.recipe = action.payload;
+    setRecipeId(state, action) {
+      return {
+        ...state,
+        recipeId: action.payload,
+      };
+    },
+    setRemoveRecipeId(state, action) {
+      return {
+        ...state,
+        recipeId: state.recipeId.filter((index) => action.payload.indexOf(index) === -1),
+      };
     },
     setTab(state, action) {
       switch (action.payload) {
@@ -71,21 +80,21 @@ const userLikedSlice = createSlice({
       state.tab = action.payload;
     },
     setModify(state) {
-      state.modify = !state.modify;
+      state.isModify = !state.isModify;
     },
     setResetRemoveIndex(state) {
-      state.removeIndex = [];
+      state.removeRecipeId = [];
     },
     setAddRemoveIndex(state, action) {
       return {
         ...state,
-        removeIndex: [...state.removeIndex, action.payload],
+        removeRecipeId: [...state.removeRecipeId, action.payload],
       };
     },
     setSliceRemoveIndex(state, action) {
       return {
         ...state,
-        removeIndex: state.removeIndex.filter((index) => index !== action.payload),
+        removeRecipeId: state.removeRecipeId.filter((index) => index !== action.payload),
       };
     },
   },
@@ -123,7 +132,8 @@ const userLikedSlice = createSlice({
 });
 
 export const {
-  setRecipe,
+  setRecipeId,
+  setRemoveRecipeId,
   setTab,
   setModify,
   setResetRemoveIndex,

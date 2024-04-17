@@ -5,36 +5,37 @@ import styled from "styled-components";
 import RecipeViewBox from "../../../components/recipe/recipeViewBox";
 import { RecipeType } from "../../../type";
 import { AppDispatch, RootState } from "../../../store/store";
-import recipe from "../../../data/recipe";
 import {
   getLikedRecipesDate,
   removeLikedRecipes,
   setModify,
+  setRecipeId,
+  setRemoveRecipeId,
   setTab,
 } from "../../../store/reducers/userLiked";
-import Recipe from "../../../data/type/recipe";
 import LikedSortTab from "../../../components/mypage/likeSortTab";
 import LikedModifyButton from "../../../components/mypage/likedModifyButton";
+import { getRecipes } from "../../../store/reducers/recipe";
 
 const UserLikedRecipesContainer = () => {
   const dispatch = useDispatch<AppDispatch>();
-  //const recipes: RecipeType[] = useSelector((state: RootState) => state.userLiked.recipe);
-  const user = useSelector((state: RootState) => state.user);
-  //const modify = useSelector((state: RootState) => state.userLiked.modify);
-
-  // api 연동하기 전에 임시로 상태 만들어서 테스트
-  const [tempRecipes, setTempRecipes] = useState<Recipe[]>([]);
-  //const [tab, setTab] = useState<number>(0);
-  //const [modify, setModify] = useState<boolean>(false);
+  const recipe = useSelector((state: RootState) => state.recipe.recipe);
+  const useLikedRecipes = useSelector((state: RootState) => state.userLiked.recipeId);
+  const removeRecipeId = useSelector(
+    (state: RootState) => state.userLiked.removeRecipeId
+  );
+  const [likeRecipes, setLikeRecipes] = useState<RecipeType[]>([]);
 
   // 정렬 버튼
   const handleSortTab = useCallback((tabNumber: number) => {
     dispatch(getLikedRecipesDate(tabNumber));
   }, []);
   // 삭제 버튼
-  const handleDeleteButton = useCallback((removeIndex: number[]) => {
-    dispatch(removeLikedRecipes(removeIndex));
-  }, []);
+  const handleDeleteButton = (removeIndex: string[]) => {
+    console.log(removeRecipeId);
+    dispatch(setRemoveRecipeId(removeRecipeId));
+    dispatch(removeLikedRecipes(removeIndex)); // 사용자 정보 변경
+  };
   // 정렬 탭 버튼
   const handleTab = useCallback((tabNumber: number) => {
     dispatch(setTab(tabNumber));
@@ -44,24 +45,39 @@ const UserLikedRecipesContainer = () => {
     dispatch(setModify());
   }, []);
 
-  // 지울거임
-  // api연동 전이라 기존 recipe 데이터에서 사용자가 좋아요한 레시피들만 필터링하겠음
+  // 사용자가 좋아요한 레시피 필터링
   const handleFilterdRecipe = useCallback(
-    (likedRecipesIndexArray: number[]) => {
+    (likedRecipesIndexArray: string[]) => {
       const filteredRecipes = recipe.filter((r) =>
         likedRecipesIndexArray.some((i) => r.id === i)
       );
-      setTempRecipes(filteredRecipes);
+      setLikeRecipes(filteredRecipes);
     },
-    [recipe]
+    [useLikedRecipes]
   );
 
-  // 처음에 보여줄 레시피 초기화하기
+  // 사용자 좋아요 리스트 요청
   useEffect(() => {
-    // 페이지 들어오면 사용자 좋아요 레시피 불러오기 api
-    // 아래 함수는 삭제할 예쩡
-    handleFilterdRecipe(user.likeRecipe);
+    if (recipe.length === 0) dispatch(getRecipes());
+    dispatch(
+      setRecipeId([
+        "IzB9VyhPGeoMO4H7L91Z",
+        "ZRHQ1CxKArlURNfrCie7",
+        "5ufley8G6p6HRVNQZo2X",
+        "15liuNctct8VqfF1sjhe",
+        "4X1t45Or44QzyyiYJyuv",
+        "F8UQyOtXca4hQo8fbfU8",
+        "IzB9VyhPGeoMO4H7L91Z",
+        "i3s2k3hrMmKspklmlIVS",
+      ])
+    );
+    handleFilterdRecipe(useLikedRecipes);
   }, []);
+
+  // 사용자 좋아요 리스트 수정
+  useEffect(() => {
+    handleFilterdRecipe(useLikedRecipes);
+  }, [useLikedRecipes]);
 
   return (
     <UserLikedRecipesWrapper>
@@ -71,7 +87,7 @@ const UserLikedRecipesContainer = () => {
         <LikedModifyButton onModify={handleModifyButton} onRemove={handleDeleteButton} />
       </div>
       <div className='view-wrapper'>
-        <RecipeViewBox filteredIngredients={tempRecipes} />
+        <RecipeViewBox recipe={likeRecipes} />
       </div>
     </UserLikedRecipesWrapper>
   );

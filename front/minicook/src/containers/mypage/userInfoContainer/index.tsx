@@ -1,12 +1,26 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 
 import styled from "styled-components";
-import { RootState } from "../../../store/store";
-
+import { UserType } from "../../../type";
 
 const UserInfoContainer = () => {
-  const user = useSelector((state: RootState) => state.user);
+  const [user, setUser] = useState<UserType>({ email: "", nickname: "" });
+
+  useEffect(() => {
+    try {
+      const userEmail = localStorage.getItem("email");
+      const userNickname = localStorage.getItem("nickname");
+
+      if (userEmail && userNickname) {
+        const email = userEmail.replace(/^"(.*)"$/, "$1");
+        const nickname = userNickname.replace(/^"(.*)"$/, "$1");
+        setUser({ email: email, nickname: nickname });
+      }
+    } catch (e) {
+      console.log("localStroage is not working");
+    }
+  }, []);
+
   return (
     <UserInfoWrapper>
       <div className='header'>개인 정보</div>
@@ -46,7 +60,7 @@ const UserInfoWrapper = styled.div`
 const StyledBox = ({ type, value }: { type: string; value: string }) => {
   return (
     <StyledBoxWrapper>
-      <div className='text items-center'>{`${type}: ${value}`}</div>
+      <div className='text items-center'>{`${type}:  ${value}`}</div>
     </StyledBoxWrapper>
   );
 };

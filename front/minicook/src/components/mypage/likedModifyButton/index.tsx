@@ -4,17 +4,18 @@ import { AppDispatch, RootState } from "../../../store/store";
 import { setResetRemoveIndex } from "../../../store/reducers/userLiked";
 interface LikedModifyButtonProps {
   onModify: () => void;
-  onRemove: (removeIndex: number[]) => void;
+  onRemove: (removeIndex: string[]) => void;
 }
 
 const LikedModifyButton: React.FC<LikedModifyButtonProps> = ({ onModify, onRemove }) => {
-  const modify = useSelector((state: RootState) => state.userLiked.modify);
-  const removeIndex = useSelector((state: RootState) => state.userLiked.removeIndex);
+  const modify = useSelector((state: RootState) => state.userLiked.isModify);
+  const removeIndex = useSelector((state: RootState) => state.userLiked.removeRecipeId);
   const dispatch = useDispatch<AppDispatch>();
 
   // 변경 취소 버튼
   const handleCancel = () => {
     onModify();
+    dispatch(setResetRemoveIndex());
   };
   // 선택한 레시피 삭제
   const handleRemove = () => {
