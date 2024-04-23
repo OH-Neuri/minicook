@@ -33,7 +33,7 @@ const MainTopRecipe: React.FC = () => {
       </div>
       <div className='image-wrapper'>
         {recipe.splice(0, 4).map(({ id, thumbnail }, v) => (
-          <StyledImage key={id} to={`/recipe?id=${id}&page=1`}>
+          <StyledImage key={id}>
             <img
               className='image'
               src={thumbnail}
@@ -90,7 +90,6 @@ const MainTopRecipeWrapper = styled.div`
       max-width: 1200px;
       display: flex;
       justify-content: space-around;
-      cursor: pointer;
       padding: 30px 0px;
         @media screen and (max-width: 790px) {
           gap:15px;
@@ -131,7 +130,7 @@ const MainTopRecipeWrapper = styled.div`
       }
     }
 `;
-const StyledImage = styled(Link)`
+const StyledImage = styled.div`
       position: relative;
 `;
 export default MainTopRecipe;
