@@ -34,7 +34,7 @@
 
 ### 배포 URL
 
-- URL : https://minicook.vercel.app/
+- URL : http://ec2-43-202-226-135.ap-northeast-2.compute.amazonaws.com/
 
 <br>
 <br>
