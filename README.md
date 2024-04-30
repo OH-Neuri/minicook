@@ -81,8 +81,8 @@ $ npm start
 
 ### 테스트 계정
 
-- ID : js@asd.co
-- PW : qq11!
+- ID : sky@naver.com
+- PW : password1@
 
 <br>
 <br>
