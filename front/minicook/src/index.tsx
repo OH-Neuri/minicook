@@ -14,10 +14,10 @@ import { tempSetUser } from "./store/reducers/userAccess";
 function loadUser() {
   try {
     // 로컬스토리지에 유저 정보가 있으면
-    const user = localStorage.getItem("user");
-    if (!user) return;
+    const email = localStorage.getItem("email");
+    if (!email) return;
     // user 다시 dispatch 하기
-    store.dispatch(tempSetUser(JSON.parse(user)));
+    store.dispatch(tempSetUser(JSON.parse(email)));
   } catch (e) {
     console.log("localStroage is not working");
   }
