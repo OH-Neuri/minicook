@@ -39,7 +39,6 @@ export const initialState: UserLikedType = {
   recipeId: [],
   recipeGetLoading: false,
   recipeGetError: false,
-  tab: 0,
   isModify: false,
   removeRecipeId: [],
   recipeRemoveLoading: false,
@@ -61,23 +60,6 @@ const userLikedSlice = createSlice({
         ...state,
         recipeId: state.recipeId.filter((index) => action.payload.indexOf(index) === -1),
       };
-    },
-    setTab(state, action) {
-      switch (action.payload) {
-        // tab : 0, 날짜순
-        case 0:
-          //getLikedRecipesDate(action.payload);
-          break;
-        // tab : 1, 좋아요순
-        case 1:
-          //getLikedRecipesLike(action.payload);
-          break;
-        // tab : 2, 사전순
-        case 2:
-          //getLikedRecipesDictionary(action.payload);
-          break;
-      }
-      state.tab = action.payload;
     },
     setModify(state) {
       state.isModify = !state.isModify;
@@ -134,7 +116,6 @@ const userLikedSlice = createSlice({
 export const {
   setRecipeId,
   setRemoveRecipeId,
-  setTab,
   setModify,
   setResetRemoveIndex,
   setAddRemoveIndex,

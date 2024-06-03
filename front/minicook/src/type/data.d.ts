@@ -37,7 +37,6 @@ export interface UserLikedType {
   recipeGetError: boolean;
   recipeRemoveLoading: boolean;
   recipeRemoveError: boolean;
-  tab: number;
   isModify: boolean;
   removeRecipeId: string[];
 }

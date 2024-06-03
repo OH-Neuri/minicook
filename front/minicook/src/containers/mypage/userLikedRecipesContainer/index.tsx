@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import styled from "styled-components";
@@ -6,16 +6,15 @@ import RecipeViewBox from "../../../components/recipe/recipeViewBox";
 import { RecipeType } from "../../../type";
 import { AppDispatch, RootState } from "../../../store/store";
 import {
-  getLikedRecipesDate,
   removeLikedRecipes,
   setModify,
   setRecipeId,
   setRemoveRecipeId,
-  setTab,
 } from "../../../store/reducers/userLiked";
 import LikedSortTab from "../../../components/mypage/likeSortTab";
 import LikedModifyButton from "../../../components/mypage/likedModifyButton";
 import { getRecipes } from "../../../store/reducers/recipe";
+import Loading from "../../../components/common/loading";
 
 const UserLikedRecipesContainer = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -26,35 +25,24 @@ const UserLikedRecipesContainer = () => {
   );
   const [likeRecipes, setLikeRecipes] = useState<RecipeType[]>([]);
 
-  // 정렬 버튼
-  const handleSortTab = useCallback((tabNumber: number) => {
-    dispatch(getLikedRecipesDate(tabNumber));
-  }, []);
   // 삭제 버튼
   const handleDeleteButton = (removeIndex: string[]) => {
-    console.log(removeRecipeId);
     dispatch(setRemoveRecipeId(removeRecipeId));
     dispatch(removeLikedRecipes(removeIndex)); // 사용자 정보 변경
   };
-  // 정렬 탭 버튼
-  const handleTab = useCallback((tabNumber: number) => {
-    dispatch(setTab(tabNumber));
-  }, []);
+
   // 수정 버튼
   const handleModifyButton = useCallback(() => {
     dispatch(setModify());
   }, []);
 
   // 사용자가 좋아요한 레시피 필터링
-  const handleFilterdRecipe = useCallback(
-    (likedRecipesIndexArray: string[]) => {
-      const filteredRecipes = recipe.filter((r) =>
-        likedRecipesIndexArray.some((i) => r.id === i)
-      );
-      setLikeRecipes(filteredRecipes);
-    },
-    [useLikedRecipes]
-  );
+  const handleFilterdRecipe = (likedRecipesIndexArray: string[]) => {
+    const filteredRecipes = recipe.filter((r) =>
+      likedRecipesIndexArray.some((i) => r.id === i)
+    );
+    setLikeRecipes(filteredRecipes);
+  };
 
   // 사용자 좋아요 리스트 요청
   useEffect(() => {
@@ -74,7 +62,7 @@ const UserLikedRecipesContainer = () => {
     handleFilterdRecipe(useLikedRecipes);
   }, []);
 
-  // 사용자 좋아요 리스트 수정
+  // 사용자 좋아요 리스트 업데이트
   useEffect(() => {
     handleFilterdRecipe(useLikedRecipes);
   }, [useLikedRecipes]);
@@ -83,11 +71,13 @@ const UserLikedRecipesContainer = () => {
     <UserLikedRecipesWrapper>
       <div className='navigation-text'>좋아요한 레시피</div>
       <div className='navigation-item'>
-        <LikedSortTab onSwitch={handleTab} onSort={handleSortTab} />
+        <LikedSortTab />
         <LikedModifyButton onModify={handleModifyButton} onRemove={handleDeleteButton} />
       </div>
       <div className='view-wrapper'>
-        <RecipeViewBox recipe={likeRecipes} />
+        <Suspense fallback={<Loading />}>
+          <RecipeViewBox recipe={likeRecipes} />
+        </Suspense>
       </div>
     </UserLikedRecipesWrapper>
   );

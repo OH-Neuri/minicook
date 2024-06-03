@@ -1,26 +1,39 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
-import { RootState } from "../../../store/store";
+import { AppDispatch } from "../../../store/store";
 
-interface LikedSortTabProps {
-  onSwitch: (tabIndex: number) => void;
-  onSort: (tabIndex: number) => void;
-}
-
-const LikedSortTab: React.FC<LikedSortTabProps> = ({ onSwitch, onSort }) => {
+const LikedSortTab: React.FC = () => {
   const tabType = ["기본", "좋아요순", "사전순"];
-  const tab = useSelector((state: RootState) => state.userLiked.tab);
+  const [tabIdx, setTabIdx] = useState<number>(0);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const sortTab = (tabNumber: number) => {
+    switch (tabNumber) {
+      // tab : 0, 날짜순
+      case 0:
+        //dispatch(getLikedRecipesDate(action.payload));
+        break;
+      // tab : 1, 좋아요순
+      case 1:
+        //dispatch(getLikedRecipesLike(action.payload));
+        break;
+      // tab : 2, 사전순
+      case 2:
+        //dispatch(getLikedRecipesDictionary(action.payload));
+        break;
+    }
+  };
 
   const handleTab = (tabIndex: number) => {
-    onSwitch(tabIndex);
-    //onSort(tabIndex);
+    setTabIdx(tabIndex);
+    //sortTab(tabIndex);
   };
 
   return (
     <LikedSortTabWrapper>
       {tabType.map((type, i) => (
-        <StyledTab key={i} onClick={() => handleTab(i)} $isSelected={i === tab}>
+        <StyledTab key={i} onClick={() => handleTab(i)} $isSelected={i === tabIdx}>
           {type}
         </StyledTab>
       ))}
