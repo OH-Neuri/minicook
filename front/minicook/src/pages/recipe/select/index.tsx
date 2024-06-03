@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { produce } from "immer";
 import ingredientsMenu, { IngredientsMenuType } from "./data/ingredients";
@@ -10,6 +10,9 @@ import { RecipeType } from "../../../type";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
 import { getRecipes } from "../../../store/reducers/recipe";
+import Loading from "../../../components/common/loading";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "../../../components/common/errorFallback";
 
 const RecipeSelect = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -18,7 +21,7 @@ const RecipeSelect = () => {
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
   const [recommendedRecipes, setRecommendedRecipes] = useState<RecipeType[]>([]);
   const recipes = useSelector((state: RootState) => state.recipe.recipe);
-
+  const recipesLoading = useSelector((state: RootState) => state.recipe.recipeGetLoading);
   /**
    * 재료 정보 배열의 재료 클릭 상태 업데이트 하는 함수(button)
    * IngredientInfo = ... {name:"대파", checked : (false <-> true)}
@@ -135,7 +138,10 @@ const RecipeSelect = () => {
         selectedIngredients={selectedIngredients}
         onToggle={handleIngredientToggle}
       />
-      <div className='select-view'>{<RecipeViewBox recipe={recommendedRecipes} />}</div>
+      <div className='select-view'>
+        <ErrorBoundary FallbackComponent={ErrorFallback}></ErrorBoundary>
+        {recipesLoading ? <Loading /> : <RecipeViewBox recipe={recommendedRecipes} />}
+      </div>
     </RecipeSelectWrapper>
   );
 };
