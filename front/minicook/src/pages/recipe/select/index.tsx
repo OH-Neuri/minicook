@@ -4,7 +4,6 @@ import { produce } from "immer";
 import ingredientsMenu, { IngredientsMenuType } from "./data/ingredients";
 
 import RecipeViewBox from "../../../components/recipe/recipeViewBox";
-import IngredientsMiddleBadge from "../../../components/recipeSelct/ingredientsMiddleBadge/inex";
 import CategoryContainer from "../../../containers/recipeSelect/categoryContainer";
 import { RecipeType } from "../../../type";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +12,7 @@ import { getRecipes } from "../../../store/reducers/recipe";
 import Loading from "../../../components/common/loading";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../../../components/common/errorFallback";
+import IngredientsMiddleBadge from "../../../components/recipeSelect/ingredientsMiddleBadge/inex";
 
 const RecipeSelect = () => {
   const dispatch = useDispatch<AppDispatch>();

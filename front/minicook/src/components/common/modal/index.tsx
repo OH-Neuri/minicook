@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { IngredientsMenuType } from "../../../pages/recipe/select/data/ingredients";
-import IngredientItem from "../../recipeSelct/IngredeintItem";
+import IngredientItem from "../../recipeSelect/IngredeintItem";
 
 interface ModalProps {
   ingredientInfo: IngredientsMenuType[];

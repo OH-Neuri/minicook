@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ingredientsMenu, {
   IngredientsMenuType,
 } from "../../../pages/recipe/select/data/ingredients";
-import Category from "../../../components/recipeSelct/category/intex";
+import Category from "../../../components/recipeSelect/category/intex";
 import { IngredientsModal } from "../../../components/common/modal";
 
 interface CategoryContainerProps {
@@ -28,7 +28,6 @@ const CategoryContainer: React.FC<CategoryContainerProps> = ({
   const modalRef = useRef<HTMLDivElement | null>(null);
   const handleOpenModal = () => setInOpenModal(true);
   const handleCloseModal = () => setInOpenModal(false);
-
 
   const handleButton = (id: number) => {
     if (selectCategory == id) {
