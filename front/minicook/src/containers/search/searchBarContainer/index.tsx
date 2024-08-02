@@ -5,34 +5,11 @@ import SearchBarList from "../../../components/search/searchBarList";
 import { collection, getDocs, query } from "firebase/firestore";
 import { fireStore } from "../../../firebase/firebaseClient";
 
-interface SearchBarInfoProps {
+interface ISearchBarInfoProps {
   input: string;
 }
 
-const filterRecipes = (querySnapshot: any, input: string) => {
-  const filteredByIngredients = querySnapshot.docs
-    .map((doc: any) => {
-      const ingredients = doc.data().ingredients;
-      if (ingredients) {
-        const hasMatchingIngredient = ingredients.some((ingredient: string) =>
-          new RegExp(input).test(ingredient)
-        );
-        if (hasMatchingIngredient) return doc.data() as RecipeType;
-      }
-    })
-    .filter((data: any): data is RecipeType => !!data);
-
-  const filteredByName = querySnapshot.docs
-    .map((doc: any) => {
-      const name = doc.data().name;
-      if (name && new RegExp(input).test(name)) return doc.data() as RecipeType;
-    })
-    .filter((data: any): data is RecipeType => !!data);
-
-  return { filteredByIngredients, filteredByName };
-};
-
-const SearchBarContainer: React.FC<SearchBarInfoProps> = ({ input }) => {
+const SearchBarContainer: React.FC<ISearchBarInfoProps> = ({ input }) => {
   const [searchRecipes, setSearchRecipes] = useState<{
     filteredByIngredients: RecipeType[];
     filteredByName: RecipeType[];
@@ -42,14 +19,37 @@ const SearchBarContainer: React.FC<SearchBarInfoProps> = ({ input }) => {
   });
 
   // 파베 recipe 조회
-  const getRecipe = useCallback(async () => {
+  const getRecipe = async () => {
     const docRef = collection(fireStore, "recipe");
-    const q = query(docRef);
-    const querySnapshot = await getDocs(q);
+    const querySnapshot = await getDocs(docRef);
 
-    const { filteredByIngredients, filteredByName } = filterRecipes(querySnapshot, input);
+    const filteredByIngredients: any = await querySnapshot.docs
+      .map((doc) => {
+        const recipeData = doc.data();
+        const ingredients = recipeData.ingredients;
+        if (ingredients) {
+          const hasMatchingIngredient = ingredients.some((ingredient: string) =>
+            new RegExp(input).test(ingredient)
+          );
+          if (hasMatchingIngredient) {
+            // 문서의 ID를 포함시키기 위해 doc.id를 데이터에 추가합니다.
+            return { ...recipeData, id: doc.id as string };
+          }
+        }
+      })
+      .filter((data: any): data is RecipeType & { id: string } => data);
+
+    const filteredByName = await querySnapshot.docs
+      .map((doc: any) => {
+        const recipeData = doc.data();
+        const name = doc.data().name;
+        if (name && new RegExp(input).test(name))
+          return { ...recipeData, id: doc.id as string };
+      })
+      .filter((data: any): data is RecipeType & { id: string } => data);
+
     setSearchRecipes({ filteredByIngredients, filteredByName });
-  }, [input]);
+  };
 
   useEffect(() => {
     if (input) getRecipe();
