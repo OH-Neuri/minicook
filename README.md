@@ -9,11 +9,15 @@
 <br>
 <br>
 
-<h3>
-  프로젝트 소개
-</h3>
+## 📑 프로젝트 설명
+### 프로젝트 개요
+- 남은 식재료들을 활용하여 만들 수 있는 레시피 추천 웹 플랫폼
 
--  Minicook은 남은 식재료를 활용하여 만들 수 있는 다양한 레시피를 추천하는 웹 서비스입니다.
+<br>
+
+### 프로젝트 배경 및 목표
+- 배경 : 요리에 대한 관심에서 출발한 이 프로젝트는 사용자들에게 더욱 유용하고 직관적인 레시피 검색 경험을 제공하기 위해 기획하게 되었습니다. 들어가는 재료만 알고 있으면 만들 수 있는 레시피를 손쉽게 찾을 수 있는 기능을 구현하고자 했습니다.
+- 목표 : 이전 프로젝트에서 경험하지 못한 **웹 성능 개선 기술**들을 적용하고, **기획부터 배포까지의 전 과정**을 직접 경험하고자 하는 목표를 세웠습니다. 이를 통해 웹 애플리케이션의 성능을 최적화하고, 사용자 경험을 극대화하는 데 중점을 두었습니다.
 
 <br>
 
@@ -40,7 +44,7 @@
 <br>
 
 
-## 시작 가이드
+## 📜 시작 가이드
 
 ### 요구사항
 
@@ -87,42 +91,58 @@ $ npm start
 <br>
 <br>
 
-## 기술 스택
+## 🛠 프로젝트 사용 기술
 
+| Name | Appliance | Versing | 선정이유 |
+| --- | --- | --- | --- |
+| React | UI/UX 제작  | 18.2.0 | 가상DOM을 통해 변경된 부분만 실제DOM에 반영하여 렌더링 성능을 향상시켜 UI/UX를 제작하기위해 선택했습니다. |
+| Redux-toolkit | 상태 관리 | 2.2.1 | 예측 가능한 데이터 플로우를 그릴 수 있다는 장점이 있고 전역으로 상태관리를 할 수 있는 라이브러리로 리덕스를 선택했습니다. |
+| Immer | 불변성 유지 | 10.0.3 | 구조가 복잡한 객체라도 간결한 코드로 불변성을 유지하며 상태를 업데이트 하기 위해 사용했습니다 |
+| Styled-components | CSS in JS | 6.1.8 | 자유로운 CSS 커스텀 컴포넌트를 만들 수 있다는 장점이 있어 선택하게 되었습니다. |
+| swiper | 캐러셀 제작 | 11.1.1 | 슬라이드가 부드러우며 다양한 UI와 반응형을 지원하고 있기에 선택했습니다. |
+| firebase | 서버 및 데이터베이스 | 10.10.0 | 실시간 데이터베이스의 기능을 제공하여 빠른 개발과 확자잉 가능하며, 높은 신뢰성과 안정성을 갖추고 있기 떄문에 선택하였습니다. |
+| react-error-boundary | 에러 바운더리 설정 | 4.0.13 | 컴포넌트 단위로 에러처리를 쉽게 감지하고 처리할 수 있어 개발자 경험이 향상되고, 에러 부분만 격리하여 사용자에게 친화적인 피드백을 제공할 수 있어 선택하였습니다. |
+| jest | 테스트 실행  | 27.5.2 | 설정이 간단하고 빠르게 테스트 환경을 구성할 수 있어 선택하였습니다. |
+| react-test-library | 테스트 시뮬레이션 | 13.4.0 | 간단하고 직관적인 API를 제공하여, 개발자가 쉽게 이해하고 사용할 수 있으며 Facebook에서 공식적으로 사용을 권장하고 있어 선택하였습니다. |
 
-### Environment
+<br>
+<br>
 
-<img src="https://img.shields.io/badge/visualstudiocode-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"/><img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white"/>
+## 👩‍💻 맡은 업무 
 
+- **React, Typescript**로 레시피 검색, 추천, 상세 정보, 로그인/회원가입 등의 전반적인 서비스 기능 개발
+- ScarpeStorm 웹 스크래핑 도구를 활용해 타사이트 mock 데이터 수집하고 정제
+- **swiper.js**를 활용해 반응형 캐러셀 이미지 구현
+- **Firebase** 사용하여 레시피 관련 데이터 관리
+- **AWS EC2**와 **PM2**를 활용하여 무중단 배포
+- **Figma**를 활용하여 UI/UX디자인 및 **반응형 디자인** 제작
+- **웹 접근성**과 **웹 표준**을 고려하여 구현
+- 기획 및 API 명세서 등 문서 작업
 
+<br>
+<br>
 
-### Config
+## 📝 프로젝트 기록
 
-<img src="https://img.shields.io/badge/NPM-CB3837?style=for-the-badge&logo=npm&logoColor=white">
+자세한 내용은 🗒[블로그](https://neuri.tistory.com/category/%F0%9F%93%91%20%EA%B0%9C%EB%B0%9C%20%EA%B8%B0%EB%A1%9D/%EC%82%AC%EC%9D%B4%EB%93%9C%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%28%EB%AF%B8%EB%8B%88%EC%BF%A1%29)에 작성되어 있습니다.
 
-### Development - Frontend
-
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white"/><img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/><img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white"/><img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=white"/><img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white"/><img src="https://img.shields.io/badge/Testinglibrary-E33332?style=for-the-badge&logo=testinglibrary&logoColor=white"/>
-
-
-
-### Development - Backend
-
-<img src="https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=white"/><img src="https://img.shields.io/badge/mongodb-47A248?style=for-the-badge&logo=mongodb&logoColor=white"/><img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white"/>
-
-
-<img src="https://img.shields.io/badge/SpringBoot-6DB33?style=for-the-badge&logo=spring&logoColor=white"/><img src="https://img.shields.io/badge/SpringSecurity-6DB33F?style=for-the-badge&logo=spring&logoColor=white"/>
-
-
-### Communication
-
-<img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white"/><img src="https://img.shields.io/badge/googlesheets-34A853?style=for-the-badge&logo=googlesheets&logoColor=white"/><img src="https://img.shields.io/badge/discord-5865F2?style=for-the-badge&logo=discord&logoColor=white"/>
+1. [이미지 렌더링 개선 사례](https://neuri.tistory.com/entry/%EC%82%AC%EC%9D%B4%EB%93%9C-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-13%ED%8E%B8-%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94-feat-%EC%B6%A9%EA%B2%A9%EC%A0%81%EC%9D%B8-%EC%84%B1%EB%8A%A5-%EC%A0%90%EC%88%98)
+2. [검색 서버 요청 개선한 사례](https://neuri.tistory.com/entry/%EC%82%AC%EC%9D%B4%EB%93%9C-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-13%ED%8E%B8-%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94-feat-%EC%B6%A9%EA%B2%A9%EC%A0%81%EC%9D%B8-%EC%84%B1%EB%8A%A5-%EC%A0%90%EC%88%98)
+3. [번들 사이즈 최적화한 사례](https://neuri.tistory.com/entry/%EC%82%AC%EC%9D%B4%EB%93%9C-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-14%ED%8E%B8-LCP-%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94-2-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%A6%AC%EC%82%AC%EC%9D%B4%EC%A7%95)
 
 <br>
 <br>
 
 
-## 화면 구성
+## 📊 문제해결 및 개선 사례 
+- 자세한 내용은 [포트폴리오](https://www.notion.so/c1bb8d0cbc144cd098567e08f22691ef?pvs=21)를 확인해주세요.
+    - 이미지 렌더링 개선 사례, 검색 서버 요청 개선한 사례
+
+
+<br>
+<br>
+
+## 💻 화면 구성
 
 |메인페이지|레시피 선택페이지|
 |:--:|:--:|
@@ -135,7 +155,10 @@ $ npm start
 <br>
 <br>
 
-## 팀 소개
+
+
+
+## 💪 팀 소개
 
 - frontend : 오하늘 (https://github.com/OH-Neuri)
 - Backend : 오종석 (https://github.com/jongseok-oh)
@@ -144,6 +167,6 @@ $ npm start
 <br>
 <br>
 
-## 참고 자료
+## 🔎 참고 사이트
 
 - 오키친 : https://ottogi.okitchen.co.kr/main/main.asp
