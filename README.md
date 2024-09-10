@@ -123,24 +123,6 @@ $ npm start
 - **웹 접근성**과 **웹 표준**을 고려하여 구현
 - 기획 및 API 명세서 등 문서 작업
 
-<br>
-<br>
-
-## 📝 프로젝트 기록
-
-자세한 내용은 🗒[블로그](https://neuri.tistory.com/category/%F0%9F%93%91%20%EA%B0%9C%EB%B0%9C%20%EA%B8%B0%EB%A1%9D/%EC%82%AC%EC%9D%B4%EB%93%9C%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%28%EB%AF%B8%EB%8B%88%EC%BF%A1%29)에 작성되어 있습니다.
-
-1. [이미지 렌더링 개선 사례](https://neuri.tistory.com/entry/%EC%82%AC%EC%9D%B4%EB%93%9C-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-13%ED%8E%B8-%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94-feat-%EC%B6%A9%EA%B2%A9%EC%A0%81%EC%9D%B8-%EC%84%B1%EB%8A%A5-%EC%A0%90%EC%88%98)
-2. [검색 서버 요청 개선한 사례](https://neuri.tistory.com/entry/%EC%82%AC%EC%9D%B4%EB%93%9C-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-13%ED%8E%B8-%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94-feat-%EC%B6%A9%EA%B2%A9%EC%A0%81%EC%9D%B8-%EC%84%B1%EB%8A%A5-%EC%A0%90%EC%88%98)
-3. [번들 사이즈 최적화한 사례](https://neuri.tistory.com/entry/%EC%82%AC%EC%9D%B4%EB%93%9C-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-14%ED%8E%B8-LCP-%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94-2-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%A6%AC%EC%82%AC%EC%9D%B4%EC%A7%95)
-
-<br>
-<br>
-
-
-## 📊 문제해결 및 개선 사례 
-- 자세한 내용은 [포트폴리오](https://www.notion.so/fd5b3677e9e54af1856580463a431514)를 확인해주세요.
-    - 이미지 렌더링 개선 사례, 검색 서버 요청 개선한 사례
 
 
 <br>
