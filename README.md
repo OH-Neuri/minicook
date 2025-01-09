@@ -42,7 +42,7 @@
 
 ### 배포 URL
 
-- URL : http://ec2-43-202-226-135.ap-northeast-2.compute.amazonaws.com/
+- URL : [미니쿡](http://ec2-52-79-150-147.ap-northeast-2.compute.amazonaws.com:3000/)
 
 <br>
 <br>
